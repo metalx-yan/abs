@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Kesiswaan\data_kelas;
+namespace App\Http\Controllers\Kesiswaan\data_siswa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Kelas\Jurusan;
+use App\Model\Siswa\Siswa;
 
-class TingkatanController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +18,17 @@ class TingkatanController extends Controller
     {
         //
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($jurusan_id)
     {
-        //
+        $jurusan = Jurusan::find($jurusan_id);
+
+        return view('pages.kesiswaan._siswa.create', compact('jurusan'));
     }
 
     /**
@@ -33,9 +37,13 @@ class TingkatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($jurusan_id, Request $request)
     {
-        //
+        $jurusan = Jurusan::find($jurusan_id);
+        $jurusan->konsentrasis->find($request->konsentrasi_id)->siswas()->create(
+            $request->all()
+        );
+        return redirect()->route('kelas.create', $jurusan->id);
     }
 
     /**

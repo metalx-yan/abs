@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKonsentrasisTable extends Migration
+class CreateMataPelajaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateKonsentrasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('konsentrasis', function (Blueprint $table) {
+        Schema::create('mata_pelajarans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('konsentrasi');
+            $table->string('kode');
+            $table->string('name');
+            $table->integer('total_jam');
             $table->timestamps();
         });
-        Schema::table('konsentrasis', function (Blueprint $table) {
+        Schema::table('mata_pelajarans', function (Blueprint $table) {
+            $table->unsignedInteger('tingkatan_id');
+            $table->foreign('tingkatan_id')->references('id')->on('tingkatans');
+        });
+        Schema::table('mata_pelajarans', function (Blueprint $table) {
             $table->unsignedInteger('jurusan_id');
             $table->foreign('jurusan_id')->references('id')->on('jurusans');
         });
@@ -31,6 +37,6 @@ class CreateKonsentrasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konsentrasis');
+        Schema::dropIfExists('mata_pelajarans');
     }
 }

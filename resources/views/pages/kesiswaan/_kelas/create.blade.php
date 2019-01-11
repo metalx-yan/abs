@@ -21,20 +21,12 @@
           <p>Lengkapi seluruh data yang diperlukan guna memudahkan segala aktfitas dalam penggunaan sistem ini.</a></p>
           <span class="section">Input Data Kelas</span>
             <div class="row">
-              <form class="form-horizontal form-label-left input_mask" action="" method="POST">
+              <form class="form-horizontal form-label-left input_mask" action="{{ route('kelas.store', $jurusan->id) }}" method="POST">
                 @csrf
-                
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Konsentrasi</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input id="name" class="form-control col-md-7 col-xs-12" name="konsentrasi" required="required" type="text">
-                  </div>
-                </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Kelas Bagian</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="name" class="form-control col-md-7 col-xs-12" name="kelas_bagian" required="required" type="text">
-                    <p>Contoh : 10 TKJ 1</p>
                   </div>
                 </div>
                 <input type="hidden" name="jurusan_id" value="">
@@ -83,17 +75,16 @@
                         <th>Kelas</th>
                         <th>Jurusan</th>
                         <th>Konsentrasi</th>
-                        <th>Kelas Bagian</th>
                       </tr>
                     </thead>
                     <tbody>
-                     
+                     @foreach ($jurusan->konsentrasis as $konsentrasi)
                       <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $konsentrasi->jurusan->tingkatan->tingkatan }}</td>
+                        <td>{{ $konsentrasi->jurusan->jurusan }}</td>
+                        <td>{{ $konsentrasi->konsentrasi }}</td>
                       </tr>
+                     @endforeach
                     </tbody>
                   </table>
                 </div>

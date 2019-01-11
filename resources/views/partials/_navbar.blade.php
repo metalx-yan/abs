@@ -8,7 +8,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset('images/img.jpg') }}" alt="">{{ Auth::check() && Auth::user()->name }} <span class="caret"></span>
+              <img src="{{ asset('images/user.png') }}" alt=""> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
               <li><a href="javascript:;"> Profile</a></li>

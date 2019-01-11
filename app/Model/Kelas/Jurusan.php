@@ -4,6 +4,7 @@ namespace App\Model\Kelas;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Jurusan extends Model
 {
     protected $fillable = [
@@ -16,5 +17,9 @@ class Jurusan extends Model
     public function konsentrasis()
     {
         return $this->hasMany(Konsentrasi::class);
+    }
+    public function mata_pelajarans()
+    {
+        return $this->hasMany(MataPelajaran::class);
     }
 }

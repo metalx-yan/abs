@@ -10,34 +10,33 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ 
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Auth::routes();
 
-// Kesiswaan
+
 Route::get('/index', 'Kesiswaan\KesiswaanController@index')->name('index');
 
-	// Data Kelas
-	Route::resource('tingkatan', 'Kesiswaan\data_kelas\TingkatanController');
-	
-	Route::get('/tambahGuru', 'Kesiswaan\data_guru\DataGuruController@tambahGuru')->name('tambahGuru');
-	Route::get('/daftarGuru', 'Kesiswaan\data_guru\DataGuruController@daftarGuru')->name('daftarGuru');
+Route::group(['prefix' => '{jurusan_id}'], function ()
+{
+	Route::resource('kelas', 'Kesiswaan\data_kelas\KelasController');
+	Route::resource('siswa', 'Kesiswaan\data_siswa\SiswaController');
+});
+Route::get('pelajaran/{$tipe}', 'Kesiswaan\data_pelajaran\PelajaranController@tampil')->name('tampil');
 
-	// Data Siswa
-	// Route::get('/tambahSiswa', 'Kesiswaan\data_siswa\DataSiswaController@tambahSiswa')->name('tambahSiswa');
-	// Route::get('/daftarSiswa', 'Kesiswaan\data_siswa\DataSiswaController@daftarSiswa')->name('daftarSiswa');
-	
+Route::resource('pelajaran', 'Kesiswaan\data_pelajaran\PelajaranController');
 
-	// Data Kelas
-	Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
-	Route::get('/listAlfa', 'Kesiswaan\data_absen\DataAbsenController@listAlfa')->name('listAlfa');
+Route::get('/tambahKelas', 'Kesiswaan\data_kelas\KelasController@tambahKelas')->name('tambahKelas');
+Route::get('/tambahGuru', 'Kesiswaan\data_guru\DataGuruController@tambahGuru')->name('tambahGuru');
+Route::get('/daftarGuru', 'Kesiswaan\data_guru\DataGuruController@daftarGuru')->name('daftarGuru');
+Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
+Route::get('/listAlfa', 'Kesiswaan\data_absen\DataAbsenController@listAlfa')->name('listAlfa');
+// Route::get('/kirim', 'Kesiswaan\data_absen\DataAbsenController@kirim')->name('kirim');
 
-	// Pelajaran
-	
+Route::get('/profilGuru', 'Guru\GuruController@profilGuru')->name('profilGuru');
+Route::get('/dataAbsen', 'Guru\GuruController@dataAbsen')->name('dataAbsen');
+Route::get('/absenSiswa', 'Guru\GuruController@absenSiswa')->name('absenSiswa');
 
-	// Guru
-	// Route::get('/profilGuru', 'GuruController@profilGuru')->name('profilGuru');
-	// Route::get('/dataAbsen', 'GuruController@dataAbsen')->name('dataAbsen');

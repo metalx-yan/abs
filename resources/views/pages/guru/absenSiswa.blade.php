@@ -25,7 +25,7 @@
                     <th>Konsentrasi</th>
                     <th>Jurusan</th>
                     <th class="hidden-phone">Jumlah Siswa</th>
-                    <th>Persentase</th>
+                    <th>Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,9 +35,7 @@
                     <td>Rekayasa Perangkat Lunak</td>
                     <td class="hidden-phone">40</td>
                     <td class="vertical-align-mid">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                      </div>
+                      <a href="">Masuk Untuk Absen</a>
                     </td>
                   </tr>
                   <tr>
@@ -46,9 +44,7 @@
                     <td>Deveint Inc</td>
                     <td class="hidden-phone">38</td>
                     <td class="vertical-align-mid">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                      </div>
+                      <a href="">Masuk Untuk Absen</a>
                     </td>
                   </tr>
                   <tr>
@@ -57,9 +53,7 @@
                     <td>Deveint Inc</td>
                     <td class="hidden-phone">35</td>
                     <td class="vertical-align-mid">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                      </div>
+                      <a href="">Masuk Untuk Absen</a>
                     </td>
                   </tr>
                 </tbody>

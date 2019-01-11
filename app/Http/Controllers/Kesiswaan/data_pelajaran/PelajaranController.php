@@ -1,40 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Kesiswaan\data_absen;
+namespace App\Http\Controllers\Kesiswaan\data_pelajaran;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Pelajaran\MataPelajaran;
+use App\Model\Pelajaran\TipePelajaran;
 
-class DataAbsenController extends Controller
+class PelajaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listAbsen()
-    {
-        return view('pages.kesiswaan._absen.listAbsen');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listAlfa()
-    {
-        return view('pages.kesiswaan._absen.listAlfa');
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function kirim()
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function tampil($tipe)
     // {
-    //     return view('pages.kesiswaan._absen.kirim');
+
+    //     $tipes = TipePelajaran::find($tipe);
+
+    //     return view('pages.kesiswaan._pelajaran.create', compact('tipes'));
     // }
+
+  
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +32,7 @@ class DataAbsenController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kesiswaan._pelajaran.create');
     }
 
     /**
@@ -54,7 +43,7 @@ class DataAbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

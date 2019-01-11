@@ -14,5 +14,10 @@ class Tingkatan extends Model
    {
    		return $this->hasMany(Jurusan::class);
    }
+   public function mata_pelajarans()
+   {
+   		return $this->hasMany(MataPelajaran::class);
+   }
 
 }	
+ 

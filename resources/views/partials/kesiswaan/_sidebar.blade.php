@@ -9,17 +9,16 @@
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+        <img src="images/user.png" alt="..." class="img-circle profile_img">
       </div>
       <div class="profile_info">
         <span>Selamat datang !</span>
-        <h2>{{ Auth::check() && Auth::user()->username }}</h2>
       </div>
     </div>
     <!-- /menu profile quick info -->
 
     <br />
-
+ 
     <!-- sidebar menu -->
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
@@ -27,51 +26,57 @@
         <ul class="nav side-menu">
           <li><a><i class="fa fa-home"></i> Persentase Kehadiran <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="">Kehadiran Permata Pelajaran</a></li>
-              <li><a href="">Kehadiran Perkelas</a></li>
+              <li><a href="#">Kehadiran Permata Pelajaran</a></li>
+              <li><a href="#">Kehadiran Perkelas</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-user"></i> Data Kelas <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               @foreach (App\Model\Kelas\Tingkatan::all() as $tingkatan)
-                <li><a href="">{{ $tingkatan->tingkatan }}<span class="fa fa-chevron-down"></span></a>
+                <li><a href="#">{{ $tingkatan->tingkatan }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     @foreach ($tingkatan->jurusans as $jurusan)
-                      <li><a href="">{{ $jurusan->jurusan }}</a></li>
+                      <li><a href="{{ route('kelas.create', $jurusan->id) }}">{{ $jurusan->jurusan }}</a></li>
                     @endforeach
                   </ul>
                 </li>
               @endforeach
             </ul>
           </li>
-          <li><a><i class="fa fa-user"></i> Data Guru <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li><a href="{{ route('tambahGuru') }}">Tambah Guru</a></li>
-              <li><a href="{{ route('daftarGuru') }}">Daftar Guru</a></li>
-            </ul>
-          </li>
+          
           <li><a><i class="fa fa-user"></i> Data Siswa <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="">Tambah Siswa</a></li>
-              <li><a href="#">Daftar Siswa</a></li>
-            </ul>
-          </li>
-          <li><a><i class="fa fa-user"></i> Data Pelajaran <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              {{-- <li><a href="{{ route('siswa.create') }}">Tambah Siswa</a> --}}
-                <li><a><i class="fa fa-home"></i> Tambah Pelajaran <span class="fa fa-chevron-down"></span></a>
+              @foreach (App\Model\Kelas\Tingkatan::all() as $tingkatan)
+                <li><a href="#">{{ $tingkatan->tingkatan }}<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href=""></a></li>
+                    @foreach ($tingkatan->jurusans as $jurusan)
+                      <li><a href="{{ route('siswa.create', $jurusan->id) }}">{{ $jurusan->jurusan }}</a></li>
+                    @endforeach
                   </ul>
                 </li>
-              {{-- </li> --}}
-              <li><a href="#">Daftar Pelajaran</a></li>
+              @endforeach
             </ul>
           </li>
+
+
+          <li><a href="#"><i class="fa fa-user"></i> Data Pelajaran<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              @foreach (App\Model\Pelajaran\TipePelajaran::all() as $tipe)
+                <li><a href="{{ route('pelajaran.create') }}">{{ $tipe->tipe_pelajaran }}</a>
+                
+                </li>
+              @endforeach
+            </ul>
+          </li>
+
+          <li><a href="{{ route('tambahGuru') }}"><i class="fa fa-user"></i> Data Guru</a>
+          </li>
+          
+          
           <li><a><i class="fa fa-edit"></i> Absensi Siswa <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="">Daftar Hadir</a></li>
-              <li><a href="">Daftar Tidak Hadir</a></li>
+              <li><a href="{{ route('listAbsen') }}">Daftar Hadir</a></li>
+              <li><a href="{{ route('listAlfa') }}">Daftar Tidak Hadir</a></li>
             </ul>
           </li>
           

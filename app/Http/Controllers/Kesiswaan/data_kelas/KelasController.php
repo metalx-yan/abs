@@ -1,49 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Kesiswaan\data_absen;
+namespace App\Http\Controllers\Kesiswaan\data_kelas;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Kelas\Jurusan;
+use App\Model\Kelas\Konsentrasi;
 
-class DataAbsenController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function listAbsen()
+    public function index()
     {
-        return view('pages.kesiswaan._absen.listAbsen');
+        
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listAlfa()
-    {
-        return view('pages.kesiswaan._absen.listAlfa');
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function kirim()
-    // {
-    //     return view('pages.kesiswaan._absen.kirim');
-    // }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($jurusan_id)
     {
-        //
+        $jurusan = Jurusan::find($jurusan_id);
+
+        return view('pages.kesiswaan._kelas.create', compact('jurusan'));
     }
 
     /**
@@ -52,9 +37,12 @@ class DataAbsenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($jurusan_id, Request $request)
     {
-        //
+        $jurusan = Jurusan::find($jurusan_id)->konsentrasis()->create([
+            'konsentrasi' => $request->konsentrasi
+        ]);
+        return redirect()->route('kelas.create', $jurusan->id);
     }
 
     /**
@@ -65,7 +53,7 @@ class DataAbsenController extends Controller
      */
     public function show($id)
     {
-        //
+      
     }
 
     /**

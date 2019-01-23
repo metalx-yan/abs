@@ -8,10 +8,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset('images/user.png') }}" alt=""> <span class="caret"></span>
+              {{-- <img src="{{ asset('images/logo.jpg') }}" alt=""> <span class="caret"></span> --}}
+              <p>Monitoring <span class="caret"></span></p>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
-              <li><a href="javascript:;"> Profile</a></li>
               <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="fa fa-sign-out pull-right">{{ __('Logout') }}</a>
                   
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

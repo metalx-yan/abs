@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username','role_id'
+        'username','password','role_id'
     ];
 
     /**
@@ -44,5 +44,14 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
-    
+    public function kesiswaan()
+    {
+        return $this->hasOne(kesiswaan::class);
+    }
+
+    public function hasRole($params)
+    {
+        $role = Role::where('name', $params)->first();
+        return $this->role == $role;
+    }    
 }

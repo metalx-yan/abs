@@ -12,7 +12,7 @@
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
             <li><a class="close-link"><i class="fa fa-close"></i></a></li>
           </ul>
-            <h3>Tambah Pelajaran <small>SMK Negeri 4 Kota Tangerang</small></h3>
+            <h3>Tambah Pelajaran <small>({{ $tp->tipe_pelajaran }})</small> <small>SMK Negeri 4 Kota Tangerang</small></h3>
           <div class="clearfix"></div>
         </div>
 
@@ -21,7 +21,7 @@
           <p>Lengkapi seluruh data yang diperlukan guna memudahkan segala aktfitas dalam penggunaan sistem ini.</a></p>
           <span class="section">Input</span>
 
-          <form class="form-horizontal form-label-left" novalidate action="" method="POST">
+          <form class="form-horizontal form-label-left" novalidate action="{{ route('pelajaran.store', $tp->id) }}" method="POST">
               @csrf
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode</label>
@@ -31,35 +31,57 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Pelajaran</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-               <input id="name" class="form-control col-md-8 col-xs-12" name="nama" required="required" type="text">
+               <input id="name" class="form-control col-md-8 col-xs-12" name="pelajaran" required="required" type="text">
                 </select>
               </div>
             </div>
+            {{-- <div class="form-group">
+              <label class="col-md-3 col-sm-3 col-xs-12 control-label">Hari           </label>
+
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="flat" checked="checked"> Senin
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="flat" checked="checked"> Selasa
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="flat" checked="checked"> Rabu
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="flat" checked="checked"> Kamis
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" class="flat" checked="checked"> Jumat
+                  </label>
+                </div>
+              </div>
+            </div> --}}
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Tingkat</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="tingkatan_id">
+                <select class="form-control" name="tingkatan_id" id="tingkatan">
+                    <option value="">--select--</option>
                   @foreach (App\Model\Kelas\Tingkatan::all() as $tingkatan)
                       <option value="{{ $tingkatan->id }}">{{ $tingkatan->tingkatan }}</option>
                   @endforeach
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Jurusan</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="jurusan">
-                </select>
-              </div>
+            <div class="form-group" id="jurusan_cont">
             </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Konsentrasi</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="konsentrasi">
-                </select>
-              </div>
+            <div class="form-group" id="konsentrasi_cont">
             </div>
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Jam</label>
@@ -132,3 +154,56 @@
 </div>
 
 @endsection
+
+@push('js_body')
+  <script>
+    $(document).ready(function () {
+      var tingkatan = $('#tingkatan');
+      var jurusan_cont = $('#jurusan_cont');
+      var konsentrasi_cont = $('#konsentrasi_cont');
+
+      tingkatan.on('change', function () {
+          if (tingkatan.val() != '') {
+            $.ajax({
+              url: 'http://monitoring-absen.test/api/jurusans/' + tingkatan.val()
+            }).done(function (response) {
+              jurusan_cont.html('');
+              jurusan_cont.html(`
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Jurusan</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select class="form-control" name="jurusan" id="jurusan">
+                    <option value="">--select--</option>
+                  </select>
+                </div>
+              `);
+              konsentrasi_cont.html('');
+              konsentrasi_cont.html(`
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Konsentrasi</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select class="form-control" name="konsentrasi_id" id="konsentrasi">
+                    <option value="">--select--</option>
+                  </select>
+                </div>
+              `);
+              response.map(function (element) {
+                $('#jurusan').append('<option value="' + element.id + '">' + element.jurusan + '</option>');
+              });
+
+              $('#jurusan').on('change', function () {
+                $('#konsentrasi').html('');
+                if ($('#jurusan').val() != '') {
+                  $.ajax({
+                    url: 'http://monitoring-absen.test/api/konsentrasis/' + $('#jurusan').val()
+                  }).done(function (response) {
+                    response.map(function (element) {
+                      $('#konsentrasi').append('<option value="' + element.id + '">' + element.konsentrasi + '</option>');
+                    });
+                  }); 
+                }
+              });
+            });
+          }
+      });
+    });
+  </script>
+@endpush

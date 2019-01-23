@@ -12,7 +12,7 @@
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
             <li><a class="close-link"><i class="fa fa-close"></i></a></li>
           </ul>
-          <h3>Daftar Siswa <small>SMK Negeri 4 Kota Tangerang</small></h3>
+          <h3>Daftar Siswa Tidak Hadir<small>SMK Negeri 4 Kota Tangerang</small></h3>
           <div class="clearfix"></div>
         </div>
         {{-- x_content --}}
@@ -20,7 +20,7 @@
           <p>Daftar absen siswa dikelas masing-masing sesuai dengan absen yang setiap hari dilakukan.</a></p>
           <div class="row">
             <div class="col-md-12 col-xs-12">
-              <span class="section">Data Siswa </span>
+              <span class="section">Data Siswa</span>
                 
             </div>
           </div>

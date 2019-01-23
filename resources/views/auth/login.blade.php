@@ -42,12 +42,6 @@
                     </button>
 
 
-                  {{--   <a class="reset_pass" href="#">Lost your password?</a> --}}
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
-
-
                 </div>
 
                 <div class="clearfix"></div>

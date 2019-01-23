@@ -16,17 +16,13 @@ class CreateMataPelajaransTable extends Migration
         Schema::create('mata_pelajarans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('kode');
-            $table->string('name');
+            $table->string('pelajaran');
             $table->integer('total_jam');
             $table->timestamps();
         });
         Schema::table('mata_pelajarans', function (Blueprint $table) {
-            $table->unsignedInteger('tingkatan_id');
-            $table->foreign('tingkatan_id')->references('id')->on('tingkatans');
-        });
-        Schema::table('mata_pelajarans', function (Blueprint $table) {
-            $table->unsignedInteger('jurusan_id');
-            $table->foreign('jurusan_id')->references('id')->on('jurusans');
+            $table->unsignedInteger('konsentrasi_id');
+            $table->foreign('konsentrasi_id')->references('id')->on('konsentrasis');
         });
     }
 

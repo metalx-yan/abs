@@ -4,89 +4,20 @@ namespace App\Http\Controllers\Kesiswaan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Kesiswaan;
+use App\User;
 
 class KesiswaanController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+    public function index()
     {
         return view('pages.kesiswaan.index');
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function tambahKelas()
-    {
-        return view('pages.kesiswaan._kelas.tambahKelas');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function tambahGuru()
-    {
-        return view('pages.kesiswaan._guru.tambahGuru');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function daftarGuru()
-    {
-        return view('pages.kesiswaan._guru.daftarGuru');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function tambahSiswa()
-    {
-        return view('pages.kesiswaan._siswa.tambahSiswa');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function daftarSiswa()
-    {
-        return view('pages.kesiswaan._siswa.daftarSiswa');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listAbsen()
-    {
-        return view('pages.kesiswaan._absen.listAbsen');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listAlfa()
-    {
-        return view('pages.kesiswaan._absen.listAlfa');
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -95,7 +26,7 @@ class KesiswaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kesiswaan.create');
     }
 
     /**
@@ -106,7 +37,20 @@ class KesiswaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $u = User::create([
+            'username' => $request->username,
+            'password' => $request->password,
+            'role_id' => 1
+        ]);
+
+        $create = Kesiswaan::create([
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'user_id' => $u->id
+        ]);
+
+        return back();
     }
 
     /**

@@ -15,7 +15,6 @@ class RoleTableSeeder extends Seeder
         $roles = [
         	'kesiswaan',
         	'guru',
-        	'wali_kelas',
         ];
 
         foreach ($roles as $role) {

@@ -34,14 +34,20 @@
                           <tr class="headings">
                             <th>No.</th>
                             <th class="column-title">Nama Siswa </th>
-                            <th class="column-title">Ming 1 </th>
-                            <th class="column-title">Ming 2 </th>
-                            <th class="column-title">Ming 3 </th>
-                            <th class="column-title">Ming 4 </th>
-                            <th class="column-title">Ming 5 </th>
-                            <th class="column-title">Ming 6 </th>
-                            <th class="column-title">Ming 7 </th>
-                            <th class="column-title">Ming 8</span>
+                            <th class="column-title">1 </th>
+                            <th class="column-title">2 </th>
+                            <th class="column-title">3 </th>
+                            <th class="column-title">4 </th>
+                            <th class="column-title">5 </th>
+                            <th class="column-title">6 </th>
+                            <th class="column-title">7 </th>
+                            <th class="column-title">8 </th>
+                            <th class="column-title">9 </th>
+                            <th class="column-title">10 </th>
+                            <th class="column-title">11 </th>
+                            <th class="column-title">12 </th>
+                            <th class="column-title">13 </th>
+                            <th class="column-title">14 </th>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -78,12 +84,48 @@
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             </td>
                           </tr>
                           <tr class="odd pointer">
                             <td class="a-center ">2
                             </td>
                             <td class=" ">Agung Gunawan</td>
+                             <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td> 
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
@@ -138,12 +180,48 @@
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             </td>
                           </tr>
                           <tr class="even pointer">
                             <td class="a-center ">4
                             </td>
                             <td class=" ">Aldi Budi Pamungkas</td>
+                             <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
@@ -174,6 +252,24 @@
                             <td class="a-center ">5
                             </td>
                             <td class=" ">Anggi Prabowo</td>
+                             <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
@@ -204,6 +300,24 @@
                             <td class="a-center ">6
                             </td>
                             <td class=" ">Esa Riski Hari Utama</td>
+                            < <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>
@@ -234,6 +348,24 @@
                             <td class="a-center ">7
                             </td>
                             <td class=" ">Gatra Fikro Haryono</td>
+                             <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
+                            <td class=" ">
+                              <input type="checkbox" id="check-all" class="flat">
+                            </td>
                             <td class=" ">
                               <input type="checkbox" id="check-all" class="flat">
                             </td>

@@ -9,30 +9,15 @@ use App\Model\Pelajaran\TipePelajaran;
 
 class PelajaranController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function tampil($tipe)
-    // {
-
-    //     $tipes = TipePelajaran::find($tipe);
-
-    //     return view('pages.kesiswaan._pelajaran.create', compact('tipes'));
-    // }
-
-  
-
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($tp)
     {
-        return view('pages.kesiswaan._pelajaran.create');
+        $tp = TipePelajaran::find($tp);
+        return view('pages.kesiswaan._pelajaran.create', compact('tp'));
     }
 
     /**
@@ -41,10 +26,13 @@ class PelajaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($tp, Request $req)
     {
-        
+        $tipe = TipePelajaran::find($tp)->mataPelajarans()->create($req->all());
+        return redirect()->route('kelas.create', $tipe->id);
     }
+
+   
 
     /**
      * Display the specified resource.

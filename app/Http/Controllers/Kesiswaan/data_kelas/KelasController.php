@@ -40,7 +40,8 @@ class KelasController extends Controller
     public function store($jurusan_id, Request $request)
     {
         $jurusan = Jurusan::find($jurusan_id)->konsentrasis()->create([
-            'konsentrasi' => $request->konsentrasi
+            'konsentrasi' => $request->konsentrasi,
+            'subbagian' => $request->subbagian
         ]);
         return redirect()->route('kelas.create', $jurusan->id);
     }

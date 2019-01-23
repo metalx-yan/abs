@@ -12,7 +12,7 @@
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
             <li><a class="close-link"><i class="fa fa-close"></i></a></li>
           </ul>
-          <h3>Daftar Siswa <small>SMK Negeri 4 Kota Tangerang</small></h3>
+          <h3>Daftar Siswa Hadir <small>SMK Negeri 4 Kota Tangerang</small></h3>
           <div class="clearfix"></div>
         </div>
         {{-- x_content --}}
@@ -20,15 +20,13 @@
           <p>Daftar absen siswa dikelas masing-masing sesuai dengan absen yang setiap hari dilakukan.</a></p>
           <div class="row">
             <div class="col-md-12 col-xs-12">
-              <span class="section">Data Siswa </span>
+              <span class="section">Data Siswa Kelas 12 RPL 1 </span>
                 <div class="btn-group">
                   <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Pilih Kelas <span class="caret"></span></button>
                   <ul role="menu" class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">11 TGM 1</a></li>
+                    <li><a href="#">11 TGM 2</a></li>
+                    
                   </ul>
                 </div>
             </div>

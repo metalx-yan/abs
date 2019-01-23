@@ -54,7 +54,6 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

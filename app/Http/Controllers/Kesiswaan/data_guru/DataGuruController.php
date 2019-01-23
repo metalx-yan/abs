@@ -4,37 +4,21 @@ namespace App\Http\Controllers\Kesiswaan\data_guru;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Guru\Guru;
+use App\User;
+use App\Model\Pelajaran\MataPelajaran;
 
 class DataGuruController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function tambahGuru()
-    {
-        return view('pages.kesiswaan._guru.tambahGuru');
-    }
-
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function daftarGuru()
-    {
-        return view('pages.kesiswaan._guru.daftarGuru');
-    }
-    
-    /**
-     * Show the form for creating a new resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('pages.kesiswaan._guru.create');
     }
 
     /**
@@ -43,9 +27,40 @@ class DataGuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $guru = Guru::create([
+            'nip'=>$req->nip,
+            'kode'=>$req->kode,
+            'nama'=>$req->nama
+            
+        ]);
+
+        $user = User::create([
+            'name'=>$req->nama,
+            'username'=>$req->username,
+            'password'=>$req->password,
+            'role_id'=>2
+        ]);
+
+        $mapel = MataPelajaran::find($req->mata_pelajaran_id);
+        foreach ($req->hari as $hari) {
+            $guru->MataPelajarans()->attach($mapel, ['hari' => $hari]);
+        }
+
+        return redirect()->route('guru.create');
+
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function atur()
+    {
+        return view('pages.kesiswaan._guru.atur');
     }
 
     /**

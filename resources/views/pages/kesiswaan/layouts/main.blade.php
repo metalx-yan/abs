@@ -1,5 +1,4 @@
 <html>
-
 @include('partials._head')
 <body class="nav-md">
     <div class="container body">
@@ -15,5 +14,6 @@
 
 </div>
 </div>
+	@stack('js_body')
 </body>
 </html>

@@ -16,6 +16,7 @@ class CreateKonsentrasisTable extends Migration
         Schema::create('konsentrasis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('konsentrasi');
+            $table->integer('subbagian')->nullable();
             $table->timestamps();
         });
         Schema::table('konsentrasis', function (Blueprint $table) {

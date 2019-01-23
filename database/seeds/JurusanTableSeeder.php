@@ -13,10 +13,11 @@ class JurusanTableSeeder extends Seeder
     public function run()
     {
        $jurusan  = [
-       		'Rekayasa Perangkat Lunak',
-       		'Teknik Pemesinan',
-       		'Teknik Bangunan',
-       		'Teknik Listrik'
+       		'Teknik Geomatika dan Geospasial',
+       		'Teknik Konstruksi dan Properti',
+       		'Teknik Ketenagalistrikan',
+       		'Teknik Mesin',
+          'Teknik Komputer dan Informatika'
        ];
 
        foreach ($jurusan as $key => $jur) {

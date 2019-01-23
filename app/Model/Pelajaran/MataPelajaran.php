@@ -3,23 +3,31 @@
 namespace App\Model\Pelajaran;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Guru\Guru;
 
 class MataPelajaran extends Model
 {
     protected $fillable = [
     	'kode',
-    	'name',
+    	'pelajaran',
     	'total_jam',
-    	'tingkatan_id'
+    	'konsentrasi_id',
+        'tipe_pelajaran_id'
     ];
-    public function tingkatan()
+    public function konsentasi()
     {
-    	return $this->belongsTo(Tingkatan::class);
+    	return $this->belongsTo(Konsentasi::class);
     }
-    public function jurusans()
+    public function tipePelajaran()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(TipePelajaran::class);
     }
-
-    
+    public function gurus()
+    {
+        return $this->belongsToMany(Guru::class);
+    }
+    public static function hari()
+    {
+        return ['senin','selasa','rabu','kamis','jumat'];
+    }
 }

@@ -13,7 +13,7 @@ class TipePelajaranTableSeeder extends Seeder
     public function run()
     {
         $tipes = [
-        	'jurusan','umum'
+        	'Jurusan','Umum'
         ];
 
         foreach ($tipes as $tipe) {

@@ -18,6 +18,11 @@ class CreateTipePelajaransTable extends Migration
             $table->string('tipe_pelajaran');
             $table->timestamps();
         });
+
+        Schema::table('mata_pelajarans', function (Blueprint $table) {
+            $table->unsignedInteger('tipe_pelajaran_id');
+            $table->foreign('tipe_pelajaran_id')->references('id')->on('tipe_pelajarans');
+        });
     }
 
     /**

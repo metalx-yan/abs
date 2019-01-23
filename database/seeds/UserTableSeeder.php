@@ -12,8 +12,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $kesiswaan = factory(User::class)->create([
-        	'role_id' => 1,
+        User::create([
+            'username' =>'kesiswaan_smkn4',
+            'password' =>'kesiswaan1357',
+            'role_id'=>1
         ]);
 
     }

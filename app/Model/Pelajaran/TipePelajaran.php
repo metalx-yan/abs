@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class TipePelajaran extends Model
 {
     protected $fillable = [
-		'name','slug'
+		'tipe_pelajaran'
     ];
+
+    public function mataPelajarans()
+    {
+    	return $this->hasMany(MataPelajaran::class);
+    }
 }

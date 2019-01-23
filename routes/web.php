@@ -18,8 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/index', 'Kesiswaan\KesiswaanController@index')->name('index');
-
 Route::group(['prefix' => '{jurusan_id}'], function ()
 {
 	Route::resource('kelas', 'Kesiswaan\data_kelas\KelasController');
@@ -27,7 +25,14 @@ Route::group(['prefix' => '{jurusan_id}'], function ()
 });
 Route::get('pelajaran/{$tipe}', 'Kesiswaan\data_pelajaran\PelajaranController@tampil')->name('tampil');
 
-Route::resource('pelajaran', 'Kesiswaan\data_pelajaran\PelajaranController');
+Route::group(['prefix' => '{tipe_pelajaran_id}'], function ()
+{
+	Route::resource('pelajaran', 'Kesiswaan\data_pelajaran\PelajaranController');
+});
+
+Route::get('guru/atur', 'Kesiswaan\data_guru\DataGuruController@atur')->name('atur');
+
+Route::resource('guru', 'Kesiswaan\data_guru\DataGuruController');
 
 Route::get('/tambahKelas', 'Kesiswaan\data_kelas\KelasController@tambahKelas')->name('tambahKelas');
 Route::get('/tambahGuru', 'Kesiswaan\data_guru\DataGuruController@tambahGuru')->name('tambahGuru');
@@ -40,3 +45,14 @@ Route::get('/profilGuru', 'Guru\GuruController@profilGuru')->name('profilGuru');
 Route::get('/dataAbsen', 'Guru\GuruController@dataAbsen')->name('dataAbsen');
 Route::get('/absenSiswa', 'Guru\GuruController@absenSiswa')->name('absenSiswa');
 
+Route::group(['middleware' => ['auth','guru']], function ()
+{
+	Route::get('/test-guru', function () {
+	    return 'test guru';
+	});
+});
+
+Route::group(['middleware' => ['auth','kesiswaan']], function ()
+{
+	Route::resource('kesiswaan','Kesiswaan\KesiswaanController');
+});

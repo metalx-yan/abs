@@ -26,7 +26,7 @@ class KelasController extends Controller
      */
     public function create($jurusan_id)
     {
-        $jurusan = Jurusan::find($jurusan_id);
+        $jurusan = Jurusan::find($jurusan_id); 
 
         return view('pages.kesiswaan._kelas.create', compact('jurusan'));
     }

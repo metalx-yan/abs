@@ -8,33 +8,14 @@ use App\Http\Controllers\Controller;
 class GuruController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function profilGuru()
+    public function index()
     {
-        return view('pages.guru.profilGuru');
+        return view('pages.guru.index');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dataAbsen()
-    {
-        return view('pages.guru.dataAbsen');
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function absenSiswa()
-    {
-        return view('pages.guru.absenSiswa');
-    }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +24,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.guru.create');
     }
 
     /**

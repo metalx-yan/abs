@@ -37,39 +37,9 @@
                 </select>
               </div>
             </div>
-            {{-- <div class="form-group">
-              <label class="col-md-3 col-sm-3 col-xs-12 control-label">Hari           </label>
-
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" checked="checked"> Senin
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" checked="checked"> Selasa
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" checked="checked"> Rabu
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" checked="checked"> Kamis
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" checked="checked"> Jumat
-                  </label>
-                </div>
-              </div>
-            </div> --}}
+            </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Tingkat</label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Tingkatan</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control" name="tingkatan_id" id="tingkatan">
                     <option value="">--select--</option>
@@ -83,7 +53,9 @@
             </div>
             <div class="form-group" id="konsentrasi_cont">
             </div>
-            <div class="form-group">
+            <br>
+            <br>
+           <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Jam</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                <input id="name" class="form-control col-md-8 col-xs-12" name="total_jam" required="required" type="text">

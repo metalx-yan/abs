@@ -18,7 +18,8 @@ class DataGuruController extends Controller
      */
     public function create()
     {
-        return view('pages.kesiswaan._guru.create');
+        $guru = Guru::all();
+        return view('pages.kesiswaan._guru.create',compact('guru'));
     }
 
     /**
@@ -34,7 +35,7 @@ class DataGuruController extends Controller
             'kode'=>$req->kode,
             'nama'=>$req->nama
             
-        ]);
+        ]); 
 
         $user = User::create([
             'name'=>$req->nama,
@@ -43,24 +44,8 @@ class DataGuruController extends Controller
             'role_id'=>2
         ]);
 
-        $mapel = MataPelajaran::find($req->mata_pelajaran_id);
-        foreach ($req->hari as $hari) {
-            $guru->MataPelajarans()->attach($mapel, ['hari' => $hari]);
-        }
-
         return redirect()->route('guru.create');
 
-    }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function atur()
-    {
-        return view('pages.kesiswaan._guru.atur');
     }
 
     /**
@@ -71,7 +56,8 @@ class DataGuruController extends Controller
      */
     public function show($id)
     {
-        //
+        $guru = Guru::find($id);
+        return view('pages.kesiswaan._guru.show',compact('guru'));
     }
 
     /**

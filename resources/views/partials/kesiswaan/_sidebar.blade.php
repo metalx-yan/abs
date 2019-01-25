@@ -61,12 +61,7 @@
             </ul>
           </li>
 
-          <li><a href="#"><i class="fa fa-users"></i> Data Guru<span class="fa fa-chevron-down"></a>
-          <ul class="nav child_menu">
-              <li><a href="{{ route('guru.create') }}">Tambah Guru</a></li>
-              <li><a href="{{ route('atur') }}">Daftar Guru</a></li>
-          </ul>
-          </li>
+          <li><a href="{{ route('guru.create') }}"><i class="fa fa-users"></i> Data Guru<span class="fa fa-chevron-down"></a></li>
           
           
           <li><a><i class="fa fa-edit"></i> Absensi Siswa <span class="fa fa-chevron-down"></span></a>

@@ -12,6 +12,6 @@ class Guru extends Model
     ];
     public function mataPelajarans()
     {
-    	return $this->belongsToMany(MataPelajaran::class)->withPivot('hari');
+    	return $this->belongsToMany(MataPelajaran::class)->withPivot(['hari', 'konsentrasi_id']);
     }
 }

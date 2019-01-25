@@ -22,6 +22,8 @@ class GuruMataPelajaran extends Migration
             $table->foreign('guru_id')->references('id')->on('gurus');
             $table->unsignedInteger('mata_pelajaran_id');
             $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajarans');
+            $table->unsignedInteger('konsentrasi_id');
+            $table->foreign('konsentrasi_id')->references('id')->on('konsentrasis');
         });
     }
 

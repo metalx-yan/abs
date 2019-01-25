@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -20,12 +21,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $url;
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/kesiswaan';
+    protected $redirectTo = '/select-role';
 
     /**
      * Create a new controller instance.

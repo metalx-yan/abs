@@ -19,8 +19,8 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-          <li><a href="{{ route('profilGuru') }}"><i class="fa fa-home"></i> Persentase Ketidakhadrian</span></a></li>
-          <li><a href="{{ route('absenSiswa') }}"><i class="fa fa-edit"></i> Absen Siswa </span></a></li>
+          <li><a href=""><i class="fa fa-home"></i> Persentase Ketidakhadrian</span></a></li>
+          <li><a href="{{ route('beranda.create') }}"><i class="fa fa-edit"></i> Absen Siswa </span></a></li>
          
         </ul>
       </div>

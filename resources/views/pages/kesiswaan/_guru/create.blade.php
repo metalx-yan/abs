@@ -45,48 +45,6 @@
                 <input id="name" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="nama" required="required" type="text">
               </div>
             </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Mata Pelajaran</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="mata_pelajaran_id" id="tingkatan">
-                    <option value="">--select--</option>
-                  @foreach (App\Model\Pelajaran\MataPelajaran::all() as $pelajaran)
-                      <option value="{{ $pelajaran->id }}">{{ $pelajaran->pelajaran }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 col-sm-3 col-xs-12 control-label">Hari</label>
-
-              <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" name="hari[]" value="senin"> Senin
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" name="hari[]" value="selasa"> Selasa
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" name="hari[]" value="rabu"> Rabu
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" name="hari[]" value="kamis"> Kamis
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" class="flat" name="hari[]" value="jumat"> Jumat
-                  </label>
-                </div>
-              </div>
-            </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
               </label>
@@ -110,6 +68,8 @@
               </div>
             </div>
             
+          
+
             
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
@@ -121,6 +81,56 @@
 
         </div>
         {{-- ! x_content --}}
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+
+              <div class="x_panel">
+                  <div class="x_title">
+                      <div class="x_content">
+                          <span class="section">Daftar Guru</span>
+                      </div>
+
+
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">NIP </th>
+                            <th class="column-title">Kode </th>
+                            <th class="column-title">Nama </th>
+                            <th class="column-title">Email </th>
+                            <th class="column-title">Username </th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span></th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          @foreach ($guru as $guru)
+                          <tr class="even pointer">
+                            <td class=" ">{{ $guru->nip }}</td>
+                            <td class=" ">{{ $guru->kode }}</td>
+                            <td class=" ">{{ $guru->nama }}</td>
+                            <td class=" ">{{ $guru->email }}</td>
+                            <td class=" ">{{ $guru->username }}</td>
+
+
+                            <td class=" last">
+                              <a href="{{ route('guru.show', $guru) }}"  class="btn btn-primary">Ubah</a>
+                              <button type="button" class="btn btn-success">Hapus</button>
+
+                            </td>
+                          <tr>
+                         @endforeach
+                          </tr>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
 
       </div>
     </div>

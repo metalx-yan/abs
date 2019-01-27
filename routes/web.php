@@ -34,6 +34,10 @@ Route::group(['middleware' => ['auth','kesiswaan']], function ()
 {
 	Route::resource('kesiswaan','Kesiswaan\KesiswaanController');
 	Route::resource('guru', 'Kesiswaan\data_guru\DataGuruController');
+	Route::group(['prefix' => 'guru/{id}'], function ()
+	{
+		Route::post('/mata_pelajarans', 'Kesiswaan\data_guru\DataGuruController@attachMataPelajaran')->name('guru.mata_pelajaran');
+	});
 	Route::group(['prefix' => '{jurusan_id}'], function ()
 	{
 		Route::resource('kelas', 'Kesiswaan\data_kelas\KelasController');

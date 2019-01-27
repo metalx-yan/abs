@@ -17,7 +17,6 @@ class CreateMataPelajaransTable extends Migration
             $table->increments('id');
             $table->string('kode');
             $table->string('pelajaran');
-            $table->integer('total_jam');
             $table->timestamps();
         });
         Schema::table('mata_pelajarans', function (Blueprint $table) {

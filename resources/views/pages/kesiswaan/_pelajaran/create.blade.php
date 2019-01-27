@@ -55,13 +55,6 @@
             </div>
             <br>
             <br>
-           <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Jam</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-               <input id="name" class="form-control col-md-8 col-xs-12" name="total_jam" required="required" type="text">
-                </select>
-              </div>
-            </div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
                 {{-- <button type="submit" class="btn btn-primary">Bersih</button> --}}

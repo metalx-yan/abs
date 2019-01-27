@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!-- page content -->
 <div class="right_col" role="main">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -67,77 +66,30 @@
           </div>
         </div>
         {{-- ! x_content --}}
-          <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-            <div class="well profile_view">
-              <div class="col-sm-10">
-                <h4 class="brief"><i>Mata Pelajaran :</i></h4>
-                <div class="left col-xs-7">
-                  <h2>Hari :</h2>
-                  <p><strong>Total Jam : </strong> </p>
-                </div>
-                <div class="right col-xs-5 text-center">
-                  <img src="images/img.jpg" alt="" class="img-circle img-responsive">
-                </div>
+        @forelse ($guru->mataPelajarans as $mapel)
+        <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+          <div class="well profile_view">
+            <div class="col-sm-10">
+              <h4 class="brief"><i>Mata Pelajaran : {{ $mapel->pelajaran }}</i></h4>
+              <div class="left col-xs-7">
+                <h2>Hari : {{ $mapel->pivot->hari }}</h2>
+                <p><strong>Total Jam : {{ $mapel->total_jam }}</strong> </p>
               </div>
-              <div class="col-xs-12 bottom text-center">
-                <div class="col-xs-12 col-sm-6 emphasis">
-                </div>
-                <div class="col-xs-12 col-sm-6 emphasis">
-                  <button type="button" class="btn btn-primary btn-xs">
-                    <i class="fa fa-user"> </i> Edit Pelajaran
-                  </button>
-                </div>
+            </div>
+            <div class="col-xs-12 bottom text-center">
+              <div class="col-xs-12 col-sm-6 emphasis">
+              </div>
+              <div class="col-xs-12 col-sm-6 emphasis">
+                <button type="button" class="btn btn-primary btn-xs">
+                  <i class="fa fa-user"> </i> Edit Pelajaran
+                </button>
               </div>
             </div>
           </div>
-
-          <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-            <div class="well profile_view">
-              <div class="col-sm-10">
-                <h4 class="brief"><i>Mata Pelajaran :</i></h4>
-                <div class="left col-xs-7">
-                  <h2>Hari :</h2>
-                  <p><strong>Total Jam :</strong> </p>
-                </div>
-                <div class="right col-xs-5 text-center">
-                  <img src="images/user.png" alt="" class="img-circle img-responsive">
-                </div>
-              </div>
-              <div class="col-xs-12 bottom text-center">
-                <div class="col-xs-12 col-sm-6 emphasis">
-                </div>
-                <div class="col-xs-12 col-sm-6 emphasis">
-                  <button type="button" class="btn btn-primary btn-xs">
-                    <i class="fa fa-user"> </i> Edit Pelajaran
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-            <div class="well profile_view">
-              <div class="col-sm-10">
-                <h4 class="brief"><i>Mata Pelajaran :</i></h4>
-                <div class="left col-xs-7">
-                  <h2>Hari :</h2>
-                  <p><strong>Total Jam :</strong> </p>
-                </div>
-                <div class="right col-xs-5 text-center">
-                  <img src="images/user.png" alt="" class="img-circle img-responsive">
-                </div>
-              </div>
-              <div class="col-xs-12 bottom text-center">
-                <div class="col-xs-12 col-sm-6 emphasis">
-                </div>
-                <div class="col-xs-12 col-sm-6 emphasis">
-                  <button type="button" class="btn btn-primary btn-xs">
-                    <i class="fa fa-user"> </i> Edit Pelajaran
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>            
+        @empty
+            <p class="lead">Mata Pelajaran belum diatur untuk guru ini</p>
+        @endforelse
 
           <div class="col-md-12 col-xs-12">
             <div class="x_panel">
@@ -156,13 +108,25 @@
               </div>
               <div class="x_content">
                 <br />
-                <form class="form-horizontal form-label-left">
+                <form class="form-horizontal form-label-left" action="{{ route('guru.mata_pelajaran', $guru->id) }}" method="post">
+                  @csrf
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-6">Konsentrasi</label>
+                    <div class="col-md-6 col-sm-3 col-xs-12">
+                      <select class="form-control" name="konsentrasi_id">
+                      @foreach ($konsentrasi as $k)
+                        <option value="{{ $k->id }}">{{ $k->subbagian . ' - ' . $k->konsentrasi }}</option>
+                      @endforeach
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-6">Mata Pelajaran</label>
                     <div class="col-md-6 col-sm-3 col-xs-12">
-                      <select class="form-control">
+                      <select class="form-control" name="mata_pelajaran_id">
                       @foreach (App\Model\Pelajaran\MataPelajaran::all() as $pelajaran)
-                        <option value="">{{ $pelajaran->pelajaran }}</option>
+                        <option value="{{ $pelajaran->id }}">{{ $pelajaran->pelajaran }}</option>
                       @endforeach
                       </select>
                     </div>
@@ -175,26 +139,26 @@
                     <div class="col-md-9 col-sm-9 col-xs-12">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" class="flat"> Senin
+                          <input type="checkbox" name="hari[]" class="flat" value="senin"> Senin
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" class="flat"> Selasa
+                          <input type="checkbox" name="hari[]" class="flat" value="selasa"> Selasa
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" class="flat"> Rabu
+                          <input type="checkbox" name="hari[]" class="flat" value="rabu"> Rabu
                         </label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" class="flat"> Kamis
+                          <input type="checkbox" name="hari[]" class="flat" value="kamis"> Kamis
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" class="flat"> Jumat
+                          <input type="checkbox" name="hari[]" class="flat" value="jumat"> Jumat
                       </div>
                       
 

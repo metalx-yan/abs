@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Guru\Guru;
 use App\User;
+use App\Model\Kelas\Konsentrasi;
 use App\Model\Pelajaran\MataPelajaran;
 
 class DataGuruController extends Controller
@@ -54,10 +55,11 @@ class DataGuruController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($req)
     {
-        $guru = Guru::find($id);
-        return view('pages.kesiswaan._guru.show',compact('guru'));
+        $guru = Guru::find($req);
+        $konsentrasi = Konsentrasi::all();
+        return view('pages.kesiswaan._guru.show', compact('guru', 'konsentrasi'));
     }
 
     /**
@@ -92,5 +94,16 @@ class DataGuruController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function attachMataPelajaran(Request $request, $id)
+    {
+        $guru = Guru::find($id);
+        $mp = MataPelajaran::find($request->mata_pelajaran_id);
+        foreach ($request->hari as $hari) {
+            $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari]);
+        }
+
+        return redirect()->back();
     }
 }

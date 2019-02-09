@@ -67,7 +67,7 @@
           <li><a><i class="fa fa-edit"></i> Absensi Siswa <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="{{ route('listAbsen') }}">Daftar Hadir</a></li>
-              <li><a href="{{ route('listAlfa') }}">Daftar Tidak Hadir</a></li>
+              <li><a href="{{ route('listAlpha') }}">Daftar Tidak Hadir</a></li>
             </ul>
           </li>
           

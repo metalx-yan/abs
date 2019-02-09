@@ -19,4 +19,8 @@ class Absensi extends Model
     {
     	return $this->belongsTo(Pertemuan::class);
     }
+    public static function absenTanpaKeterangan()
+    {
+        return Absensi::where('keterangan', 'alpha')->get()->groupBy('siswa_id');
+    }
 }

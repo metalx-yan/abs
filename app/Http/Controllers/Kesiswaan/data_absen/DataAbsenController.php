@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kesiswaan\data_absen;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Absen\Absensi;
 
 class DataAbsenController extends Controller
 {
@@ -22,9 +23,10 @@ class DataAbsenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listAlfa()
+    public function listAlpha()
     {
-        return view('pages.kesiswaan._absen.listAlfa');
+        $absensis = Absensi::absenTanpaKeterangan();
+        return view('pages.kesiswaan._absen.listAlpha', compact('absensis'));
     }
     /**
      * Display a listing of the resource.

@@ -21,9 +21,6 @@ Auth::routes();
 
 
 
-Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
-Route::get('/listAlfa', 'Kesiswaan\data_absen\DataAbsenController@listAlfa')->name('listAlfa');
-// Route::get('/kirim', 'Kesiswaan\data_absen\DataAbsenController@kirim')->name('kirim');
 
 Route::group(['middleware' => ['auth','guru']], function ()
 {
@@ -69,3 +66,8 @@ Route::group(['middleware' => ['auth']], function ()
 		}
 	});
 });
+
+
+Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
+Route::get('/listAlpha', 'Kesiswaan\data_absen\DataAbsenController@listAlpha')->name('listAlpha');
+// Route::get('/kirim', 'Kesiswaan\data_absen\DataAbsenController@kirim')->name('kirim');

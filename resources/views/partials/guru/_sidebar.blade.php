@@ -19,7 +19,7 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-          <li><a href=""><i class="fa fa-home"></i> Persentase Ketidakhadrian</span></a></li>
+          <li><a href="{{ route('beranda.index') }}"><i class="fa fa-home"></i> Absen Kelas</span></a></li>
           <li><a href="{{ route('beranda.create') }}"><i class="fa fa-edit"></i> Absen Siswa </span></a></li>
          
         </ul>

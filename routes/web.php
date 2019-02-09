@@ -27,7 +27,11 @@ Route::get('/listAlfa', 'Kesiswaan\data_absen\DataAbsenController@listAlfa')->na
 
 Route::group(['middleware' => ['auth','guru']], function ()
 {
-	Route::resource('beranda', 'Guru\GuruController');
+	Route::resource('beranda', 'Guru\GuruController')->except('show');
+	Route::group(['prefix' => 'kelas/{kelas}'], function ()
+	{
+		Route::get('beranda/{id}/{hari}', 'Guru\GuruController@show')->name('beranda.show');
+	});
 });
 
 Route::group(['middleware' => ['auth','kesiswaan']], function ()
@@ -42,6 +46,10 @@ Route::group(['middleware' => ['auth','kesiswaan']], function ()
 	{
 		Route::resource('kelas', 'Kesiswaan\data_kelas\KelasController');
 		Route::resource('siswa', 'Kesiswaan\data_siswa\SiswaController');
+		Route::group(['prefix' => 'kelas/{id}'], function ()
+		{
+			Route::post('/mata-pelajarans', 'Kesiswaan\data_kelas\KelasController@attachMapel')->name('kelas.attach.mapel');
+		});
 	});
 	Route::group(['prefix' => '{tipe_pelajaran_id}'], function ()
 	{

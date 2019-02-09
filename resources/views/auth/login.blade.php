@@ -6,7 +6,7 @@
     <div class="animate form login_form">
         <section class="login_content">
             <form method="POST" action="{{ route('login') }}">
-                <h1><i class="fa fa-user icon"><h1>Kesiswaan</h1></i></h1>
+                <h1><i class="fa fa-user icon"></i></h1>
                 @csrf
                 <h5>Login Form</h5>
                 <div>

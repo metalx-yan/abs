@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
+use App\Model\Guru\Guru;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,9 @@ class User extends Authenticatable
     {
         $role = Role::where('name', $params)->first();
         return $this->role == $role;
+    }
+    public function guru()
+    {
+        return $this->hasOne(Guru::class);
     }    
 }

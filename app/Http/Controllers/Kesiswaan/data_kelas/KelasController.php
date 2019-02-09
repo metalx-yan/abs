@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Kesiswaan\data_kelas;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Kelas\Tingkatan;
 use App\Model\Kelas\Jurusan;
 use App\Model\Kelas\Konsentrasi;
+use App\Model\Pelajaran\MataPelajaran;
 
 class KelasController extends Controller
 {
@@ -17,7 +19,7 @@ class KelasController extends Controller
     public function index()
     {
         
-    }
+    }  
 
     /**
      * Show the form for creating a new resource.
@@ -26,8 +28,8 @@ class KelasController extends Controller
      */
     public function create($jurusan_id)
     {
-        $jurusan = Jurusan::find($jurusan_id); 
-
+        $jurusan = Jurusan::find($jurusan_id);  
+        // $tingkatan = Tingkatan::find($jurusan_id);
         return view('pages.kesiswaan._kelas.create', compact('jurusan'));
     }
 
@@ -52,9 +54,11 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($jurusan_id, $id)
     {
-      
+        $kelas = Konsentrasi::find($id);
+        $jurusan = Jurusan::find($jurusan_id); 
+        return view('pages.kesiswaan._kelas.show', compact('kelas', 'jurusan'));
     }
 
     /**
@@ -89,5 +93,19 @@ class KelasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function attachMapel(Request $request, $jurusan, $kelas)
+    {
+        $kelas = Konsentrasi::find($kelas);
+        foreach ($request->mapel as $m) {
+            $map = MataPelajaran::find($m);
+            $kelas->mata_pelajarans()->attach($map, [
+                'tahun_awal' => $request->tahun_awal,
+                'tahun_akhir' => $request->tahun_akhir
+            ]);
+        }
+
+        return redirect()->back();
     }
 }

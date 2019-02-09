@@ -8,7 +8,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h3>Data Siswa <small>SMK Negeri 4 Kota Tangerang</small></h3>
+                    <h3>Data Siswa <small> Kelas {{ $jurusan->tingkatan->tingkatan }} {{ $jurusan->jurusan }} SMK Negeri 4 Kota Tangerang</small></h3>
                         <div class="clearfix"></div>
                 </div>
 
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Subbagian</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub bagian</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
                                         @foreach ($jurusan->konsentrasis as $konsentrasi)
@@ -39,20 +39,20 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nip">NIS <span class="required">*</span></label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nip">NIS</span></label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                       <input type="text" id="email" name="nis" required="required" class="form-control col-md-7 col-xs-12">
                                   </div>
                             </div>
                             <div class="item form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span></label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama</span></label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                       <input id="name" class="form-control col-md-8 col-xs-12" name="nama" required="required" type="text">
                                   </div>
                             </div>
 
                             <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">No. Handphone Orang Tua <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">No. Telepon Orang Tua </span>
                               </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input id="name" class="form-control col-md-8 col-xs-12"  name="no_hp_orangtua" required="required" type="text">
@@ -68,62 +68,60 @@
 
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <div class="x_content">
-                                    <span class="section">Daftar Siswa</span>
-                                </div>
-
-
-                                <table class="table table-striped jambo_table bulk_action">
-                                  <thead>
-                                    <tr class="headings">
-                                      <th class="column-title">Tingkatan </th>
-                                      <th class="column-title">Jurusan </th>
-                                      <th class="column-title">Konsentrasi </th>
-                                      <th class="column-title">Sub Bagian </th>
-                                      <th class="column-title">NIS </th>
-                                      <th class="column-title">Nama </th>
-                                      <th class="column-title">No. Telpon Orang Tua </th>
-
-                                      <th class="column-title no-link last"><span class="nobr">Action</span></th>
-                                    </tr>
-                                  </thead>
-
-                                  <tbody>
-                                    @foreach ($jurusan->konsentrasis as $konsentrasi)
-                                    @foreach ($konsentrasi->siswas as $siswa)
-                                      {{-- expr --}}
-                                    <tr class="even pointer">
-                                      <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }}</td>
-                                      <td class=" ">{{ $konsentrasi->jurusan->jurusan }}</td>
-                                      <td class=" ">{{ $konsentrasi->konsentrasi }}</td>
-                                      <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }} {{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</td>
-                                      <td class="">{{ $siswa->nis }}</td>
-                                      <td class="">{{ $siswa->nama }}</td>
-                                      <td class="">{{ $siswa->no_hp_orangtua }}</td>
-                                    <tr>
-                                    @endforeach
-                                   @endforeach
-                                    </tr>
-                                    </tr>
-                                  </tbody>
-                                </table>
-
-                            </div>
-
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Daftar Siswa<small>SMK Negeri 4 Kota Tangerang</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link col-md-offset-12"><i class="fa fa-chevron-up"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
                         </div>
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Pilih Konsentrasi <span class="caret"></span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu">
+                                @foreach (App\Model\Kelas\Jurusan::all() as $jur)
+                                    <li value="{{ $jur->jurusan }}"><a href="#">{{ $jur->jurusan }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div> 
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">NIS </th>
+                                    <th class="column-title">Nama </th>
+                                    <th class="column-title">Konsentrasi </th>
+                                    <th class="column-title">Kelas</th>
+                                    <th class="column-title">Telpon Orang Tua </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jurusan->konsentrasis as $konsentrasi)
+                                    @foreach ($konsentrasi->siswas as $siswa)
+                                      <tr class="even pointer">
+                                        <td class="">{{ $siswa->nis }}</td>
+                                        <td class="">{{ $siswa->nama }}</td>
+                                        <td class=" ">{{ $konsentrasi->konsentrasi }}</td>
+                                        <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }} {{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</td>
+                                        <td class="">{{ $siswa->no_hp_orangtua }}</td>
+                                        <td>
+                                          <button type="button" class="fa fa-edit"></button>
+                                          <button type="button" class="fa fa-trash"></button>
+                                        </td>
+                                      <tr>
+                                    @endforeach
+                                @endforeach
+                            </tbody>
+                        </table>
 
                     </div>
-                  </div>
+                </div>
 
-
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 @endsection

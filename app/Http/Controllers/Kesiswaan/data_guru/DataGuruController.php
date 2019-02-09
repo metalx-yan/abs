@@ -31,19 +31,19 @@ class DataGuruController extends Controller
      */
     public function store(Request $req)
     {
-        $guru = Guru::create([
-            'nip'=>$req->nip,
-            'kode'=>$req->kode,
-            'nama'=>$req->nama
-            
-        ]); 
-
         $user = User::create([
             'name'=>$req->nama,
             'username'=>$req->username,
             'password'=>$req->password,
             'role_id'=>2
         ]);
+        $guru = Guru::create([
+            'nip'=>$req->nip,
+            'kode'=>$req->kode,
+            'nama'=>$req->nama,
+            'user_id'=>$user->id
+        ]); 
+
 
         return redirect()->route('guru.create');
 
@@ -101,7 +101,7 @@ class DataGuruController extends Controller
         $guru = Guru::find($id);
         $mp = MataPelajaran::find($request->mata_pelajaran_id);
         foreach ($request->hari as $hari) {
-            $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari]);
+            $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari, 'jam' => $request->all()["time-" . $hari]]);
         }
 
         return redirect()->back();

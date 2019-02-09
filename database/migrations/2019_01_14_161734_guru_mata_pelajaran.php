@@ -15,6 +15,7 @@ class GuruMataPelajaran extends Migration
     {
         Schema::create('guru_mata_pelajaran', function (Blueprint $table) {
             $table->enum('hari',['senin','selasa','rabu','kamis','jumat']);
+            $table->time('jam');
             $table->timestamps();
         });
         Schema::table('guru_mata_pelajaran', function (Blueprint $table) {

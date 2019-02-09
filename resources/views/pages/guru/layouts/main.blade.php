@@ -13,7 +13,8 @@
 @include('partials._footer')
 @include('partials._javascript')
 
-</div>
-</div>
+		</div>
+	</div>
+	@stack('js_body')
 </body>
 </html>

@@ -43,7 +43,7 @@ class SiswaController extends Controller
         $jurusan->konsentrasis->find($request->konsentrasi_id)->siswas()->create(
             $request->all()
         );
-        return redirect()->route('kelas.create', $jurusan->id);
+        return redirect()->route('siswa.create', $jurusan->id);
     }
 
     /**

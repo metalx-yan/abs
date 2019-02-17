@@ -26,6 +26,7 @@ class SiswaController extends Controller
      */
     public function create($jurusan_id)
     {
+        // dd($jurusan_id);
         $jurusan = Jurusan::find($jurusan_id);
 
         return view('pages.kesiswaan._siswa.create', compact('jurusan'));
@@ -39,7 +40,9 @@ class SiswaController extends Controller
      */
     public function store($jurusan_id, Request $request)
     {
+        // dd($request);
         $jurusan = Jurusan::find($jurusan_id);
+        // dd($jurusan);
         $jurusan->konsentrasis->find($request->konsentrasi_id)->siswas()->create(
             $request->all()
         );
@@ -54,7 +57,8 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        // $siswa = Siswa::first($id);
+        // return view('pages.kesiswaan._siswa.show', compact('siswa'));
     }
 
     /**
@@ -63,9 +67,11 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($majorid, $id)
     {
-        //
+        $update = Siswa::find($id);
+
+        return view('pages.kesiswaan._siswa.edit', compact('update'));
     }
 
     /**
@@ -77,7 +83,15 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = Siswa::findOrFail($id);
+        $update->nis = $request->nis;
+        $update->nama = $request->nama;
+        $update->no_hp_orangtua = $request->no_hp_orangtua;
+        $update->konsentrasi_id = $request->konsentrasi_id;
+        $update->save();
+
+
+        return redirect()->route('daftarsiswa', [$update->id, $update->konsentrasi->id]);
     }
 
     /**
@@ -88,6 +102,10 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa = Siswa::find($id);
+
+        $siswa->delete();
+
+        return back();
     }
 }

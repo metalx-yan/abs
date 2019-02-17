@@ -22,7 +22,7 @@ class CreateSiswasTable extends Migration
         });
         Schema::table('siswas', function (Blueprint $table) {
             $table->unsignedInteger('konsentrasi_id');
-            $table->foreign('konsentrasi_id')->references('id')->on('konsentrasis');
+            $table->foreign('konsentrasi_id')->references('id')->on('konsentrasis')->onDelete('cascade');
         });
     }
 

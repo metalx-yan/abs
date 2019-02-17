@@ -8,6 +8,7 @@ use App\Model\Kelas\Tingkatan;
 use App\Model\Kelas\Jurusan;
 use App\Model\Kelas\Konsentrasi;
 use App\Model\Pelajaran\MataPelajaran;
+use App\Model\Siswa\Siswa;
 
 class KelasController extends Controller
 {
@@ -20,6 +21,13 @@ class KelasController extends Controller
     {
         
     }  
+
+    public function daftarSiswa($jurusan, $siswa)
+    {
+        $siswa = Konsentrasi::find($siswa);
+        // dd($siswa);
+        return view('pages.kesiswaan._siswa.daftarSiswa', compact('siswa'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +66,9 @@ class KelasController extends Controller
     {
         $kelas = Konsentrasi::find($id);
         $jurusan = Jurusan::find($jurusan_id); 
-        return view('pages.kesiswaan._kelas.show', compact('kelas', 'jurusan'));
+        // $all = Konsentrasi::all();
+
+        return view('pages.kesiswaan._kelas.show', compact('kelas', 'jurusan','all'));
     }
 
     /**

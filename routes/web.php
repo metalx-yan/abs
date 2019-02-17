@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth','kesiswaan']], function ()
 	Route::group(['prefix' => '{jurusan_id}'], function ()
 	{
 		Route::resource('kelas', 'Kesiswaan\data_kelas\KelasController');
+		Route::get('siswa/daftarsiswa/{siswa_id}', 'Kesiswaan\data_kelas\KelasController@daftarSiswa')->name('daftarsiswa');
 		Route::resource('siswa', 'Kesiswaan\data_siswa\SiswaController');
 		Route::group(['prefix' => 'kelas/{id}'], function ()
 		{

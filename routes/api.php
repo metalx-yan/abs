@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('jurusans/{tingkatan}', 'ApiController@jurusans');
 Route::get('konsentrasis/{jurusan}', 'ApiController@konsentrasis');
-// Route::post('konsentrasi/{konsentrasi}/mata_pelajaran/{mapel}/siswa/{siswa}', 'ApiController@absen');
+Route::post('siswa/{id}/sms/harian/bolos/', 'SMSController@SMSHarianBolos')->name('sms.harian.bolos');

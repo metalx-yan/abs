@@ -18,12 +18,6 @@
         {{-- x_content --}}
         <div class="x_content">
           <p>Daftar absen siswa dikelas masing-masing sesuai dengan absen yang setiap hari dilakukan.</a></p>
-          <div class="row">
-            <div class="col-md-12 col-xs-12">
-              <span class="section">Data Siswa</span>
-                
-            </div>
-          </div>
           <br>
 
           <div class="clearfix"></div>
@@ -82,4 +76,22 @@
     </div>
   </div>
 </div>
+<script>
+    function sendSMS() {
+      $.ajax({
+        type: "POST",
+        contentType : 'application/json',
+        url: "http://45.32.107.195/sms/api_sms_reguler_send_json.php",
+        data: {
+          "apikey":"b061980e7d4501ce34073effebfd67c8",
+          "callbackurl":"",
+          "datapacket": [
+            {"number":"081585366463","message":"asdhasdkasljdaskdhjahsdjhasjkhdkjashdjashdkjashdkasj"}
+          ]
+        },
+        dataType: 'json',
+        accessControlAllowOrigin: '*'
+      });
+    }
+</script>
 @endsection

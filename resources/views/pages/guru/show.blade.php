@@ -124,13 +124,16 @@
                                         <td class="">{{ $absensi->siswa->nama }}</td>
                                         <td class="">
                                           <div class="row">
-                                              <input type="radio" class="flat" name="sakit-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'sakit' ? 'checked' : null }}> Sakit
-                                              <input type="radio" class="flat" name="izin-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'izin' ? 'checked' : null }}> Izin
-                                              <input type="radio" class="flat" name="alpha-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'alpha' ? 'checked' : null }}> Tanpa Keterangan
+                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'sakit' ? 'checked' : null }}> Sakit
+                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'izin' ? 'checked' : null }}> Izin
+                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'alpha' ? 'checked' : null }}> Tanpa Keterangan
                                           </div>
                                         </td>
                                         <td class=" last">
-                                          <button type="button" class="btn btn-success">Kirim</button>
+                                          <button type="button" class="btn btn-success">Ubah Status</button>
+                                          @if ($absensi->keterangan == 'alpha')
+                                            <button type="button" onclick="kirimSMS({{ $absensi->siswa->id }})" class="btn btn-success">Kirim SMS</button>
+                                          @endif
                                         </td>
                                       </tr>
                                       @php
@@ -172,5 +175,13 @@
         console.log('Submit absen ' + siswa);
         $('#siswa').append('<input type="hidden" name="siswa[]" value="' + siswa + '">');
       };
+
+      function kirimSMS(id) {
+        console.log("Sending SMS");
+        $.post('http://monitoring-absen.test/api/siswa/' + id + '/sms/harian/bolos', function( data ) {
+          console.log(data);
+        });
+      };
+
   </script>
 @endpush

@@ -41,12 +41,7 @@
                                         <input id="nama" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="nama" required="required" type="text">
                                     </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="email" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="email" required="required" type="email">
-                                    </div>
-                            </div>
+                          
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -77,21 +72,13 @@
                                 </ul>
                                 <div class="clearfix"></div>
                         </div>
-                        <div class="btn-group">
-                        <table class="table table-striped jambo_table bulk_action col-md-offset-2" align="">
+                        <table class="table table-striped jambo_table bulk_action" align="">
                             <thead>
                                 <tr class="headings">
                                     <th class="column-title">NIP </th>
-                                    <th class="column-title"></th>
-                                    <th class="column-title"></th>
                                     <th class="column-title">Kode </th>
-                                    <th class="column-title"></th>
-                                    <th class="column-title"></th>
                                     <th class="column-title">Nama </th>
-                                    <td class="column-title"></td>
-                                    <th class="column-title"></th>
                                     <th class="column-title">Username </th>
-                                    <td class="column-title"></td>
                                     <th class="column-title no-link last"><span class="nobr"></span></th>
                                 </tr>
                             </thead>
@@ -99,25 +86,30 @@
                                 @foreach ($guru as $guru)
                                     <tr class="even pointer">
                                         <td class=" ">{{ $guru->nip }}</td>
-                                        <td></td>
-                                        <td></td>
                                         <td class=" ">{{ $guru->kode }}</td>
-                                        <td></td>
-                                        <td></td>
                                         <td class=" ">{{ $guru->nama }}</td>
-                                        <td></td>
-                                        <td></td>
                                         <td class=" ">{{ $guru->user->username }}</td>
-                                        <td></td>
-                                        <td class=" last">
-                                            <button type="button" class="fa fa-edit"></button>
-                                            <button type="button" class="fa fa-trash"></button>
-                                            <a href="{{ route('guru.show', $guru) }}" ><i><u>Atur Pelajaran Yang Diajar</u></i></a>
+                                        <td class="last" align="right_col">
+                                            <div class="row">
+                                                <div class="col-md-12 col-md-offset-6">
+                                                    <a href="{{ route('guru.edit', $guru->id) }}" class="fa fa-edit btn btn-success"></a>
+                                                    <button type="button" class="fa fa-trash btn btn-danger"></button>
+                                                    <a href="{{ route('guru.show', $guru) }}" class="fa fa-list-ol btn btn-info" ></a>
+                                                </div>
+                                            </div>
                                         </td>
-                                    <tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="bs-glyphicons">
+                            <ul class="bs-glyphicons-list">
+                                <li>
+                                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                                    <span class="glyphicon-class">Cetak Data Siswa</span>
+                                </li>
+                            </ul>
+                    </div>
 
                     </div>
                 </div>

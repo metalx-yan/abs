@@ -17,7 +17,9 @@ class PelajaranController extends Controller
     public function create($tp)
     {
         $tp = TipePelajaran::find($tp);
-        return view('pages.kesiswaan._pelajaran.create', compact('tp'));
+        $pel = MataPelajaran::all();
+        // dd($pel);
+        return view('pages.kesiswaan._pelajaran.create', compact('tp', 'pel'));
     }
 
     /**

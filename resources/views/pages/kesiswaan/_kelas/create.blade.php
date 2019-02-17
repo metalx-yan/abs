@@ -69,9 +69,9 @@
                                         <td class=" ">{{ $konsentrasi->konsentrasi }}</td>
                                         <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }} {{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</td>
                                         <td class="">
-                                          <button type="button" class="fa fa-edit"></button>
-                                          <button type="button" class="fa fa-trash"></button>
-                                          <a href="{{ route('kelas.show', [$jurusan->id, $konsentrasi->id]) }}"><i><u>Atur Pelajaran</u></i></a>
+                                          <button type="button" class="btn btn-success fa fa-edit"></button>
+                                          <button type="button" class="btn btn-danger fa fa-trash"></button>
+                                          <a href="{{ route('kelas.show', [$jurusan->id, $konsentrasi->id]) }}" class="btn btn-info fa fa-list-ol"></a>
                                         </td>
                                       <tr>
                                     @endforeach

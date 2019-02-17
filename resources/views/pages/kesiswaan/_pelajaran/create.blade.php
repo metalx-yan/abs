@@ -50,7 +50,7 @@
                                 </ul>
                                 <div class="clearfix"></div>
                         </div>
-                        <div class="btn-group">
+                        {{-- <div class="btn-group">
                             <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Pilih Konsentrasi <span class="caret"></span>
                             </button>
                             <ul role="menu" class="dropdown-menu">
@@ -58,26 +58,34 @@
                                     <li value="{{ $tipe->tipe_pelajaran }}"><a href="#">{{ $tipe->tipe_pelajaran }}</a></li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> --}}
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title">Tingkatan </th>
-                                    <th class="column-title" align="center">Jurusan </th>
-                                    <th class="column-title">Konsentrasi </th>
-                                    <th class="column-title">Kelas</th>
+                                    <th class="column-title">Jurusan </th>
+                                    <th class="column-title" align="center">Kode </th>
+                                    <th class="column-title">Pelajran </th>
                                     <th class="column-title no-link last"><span class="nobr"></span></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($tp->tipe_pelajarans as $konsentrasi) --}}
+                                  @foreach ($pel as $element)
+                                    @if ($element->tipe_pelajaran_id == $tp->id)
+                                      {{-- expr --}}
                                 <tr class="even pointer">
-                                    <td class=" ">{{-- {{ $konsentrasi->tipe_pelajaran }} --}}</td>
+                                    {{-- expr --}}
+                                    <td class=" ">{{ $element->tipePelajaran->tipe_pelajaran }}</td>
+                                    <td class=" ">{{ $element->kode }}</td>
+                                    <td class=" ">{{ $element->pelajaran }}</td>
                                     <td>
-                                        <button type="button" class="fa fa-edit"></button>
-                                        <button type="button" class="fa fa-trash"></button>
+                                        <div class="col-md-12 col-md-offset-8">
+                                            <button type="button" class="btn btn-success fa fa-edit"></button>
+                                            <button type="button" class="btn btn-danger fa fa-trash"></button>
+                                        </div>
                                     </td>
                                 <tr>
+                                    @endif
+                                  @endforeach
                                 {{-- @endforeach --}}
                             </tbody>
                         </table>

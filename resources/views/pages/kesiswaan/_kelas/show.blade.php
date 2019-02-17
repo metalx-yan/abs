@@ -36,7 +36,7 @@
                                                     <td class=" ">{{ $kelas->jurusan->jurusan }}</td>
                                                     <td class=" ">{{ $kelas->konsentrasi }}</td>
                                                     <td class=" ">{{ $kelas->jurusan->tingkatan->tingkatan }} {{ $kelas->konsentrasi }} {{ $kelas->subbagian }}</td>
-                                                <tr>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -51,7 +51,6 @@
                                 <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                          <br />
                             <form class="form-horizontal form-label-left" action="{{ route('kelas.attach.mapel', [$jurusan->id, $kelas->id]) }}" method="post">
                                 @csrf
                                 <div class="form-group col-md-12">
@@ -89,5 +88,5 @@
         </div>
     </div>
 </div>
-
+</div>
 @endsection

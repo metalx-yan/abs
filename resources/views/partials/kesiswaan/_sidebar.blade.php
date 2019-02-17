@@ -16,12 +16,6 @@
       <div class="menu_section">
         <h3>Dashboard</h3>
         <ul class="nav side-menu">
-          <li><a><i class="fa fa-bar-chart"></i> Persentase Tidak Hadir <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li><a href="#">Kehadiran Permata Pelajaran</a></li>
-              <li><a href="#">Kehadiran Perkelas</a></li>
-            </ul>
-          </li>
           <li><a><i class="fa fa-building-o"></i> Data Kelas <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               @foreach (App\Model\Kelas\Tingkatan::all() as $tingkatan)

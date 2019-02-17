@@ -19,21 +19,11 @@
                         <form class="form-horizontal form-label-left" novalidate action="{{ route('siswa.store', $jurusan->id) }}" method="POST">
                         @csrf
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Konsentrasi</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Kelas</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
                                         @foreach ($jurusan->konsentrasis as $konsentrasi)
-                                            <option value="{{ $konsentrasi->id }}">{{ $konsentrasi->konsentrasi }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub bagian</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
-                                        @foreach ($jurusan->konsentrasis as $konsentrasi)
-                                            <option value="{{ $konsentrasi->id }}">{{ $konsentrasi->subbagian }}</option>
+                                            <option value="{{ $konsentrasi->id }}">{{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,41 +67,26 @@
                                 </ul>
                                 <div class="clearfix"></div>
                         </div>
-                        <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Pilih Konsentrasi <span class="caret"></span>
-                            </button>
-                            <ul role="menu" class="dropdown-menu">
-                                @foreach (App\Model\Kelas\Jurusan::all() as $jur)
-                                    <li value="{{ $jur->jurusan }}"><a href="#">{{ $jur->jurusan }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div> 
+                        
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title">NIS </th>
-                                    <th class="column-title">Nama </th>
-                                    <th class="column-title">Konsentrasi </th>
+                                    <th class="column-title">Jurusan</th>
+                                    <th class="column-title">Konsentrasi</th>
                                     <th class="column-title">Kelas</th>
-                                    <th class="column-title">Telpon Orang Tua </th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($jurusan->konsentrasis as $konsentrasi)
-                                    @foreach ($konsentrasi->siswas as $siswa)
                                       <tr class="even pointer">
-                                        <td class="">{{ $siswa->nis }}</td>
-                                        <td class="">{{ $siswa->nama }}</td>
+                                        <td class=" ">{{ $konsentrasi->jurusan->jurusan }}</td>
                                         <td class=" ">{{ $konsentrasi->konsentrasi }}</td>
                                         <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }} {{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</td>
-                                        <td class="">{{ $siswa->no_hp_orangtua }}</td>
                                         <td>
-                                          <button type="button" class="fa fa-edit"></button>
-                                          <button type="button" class="fa fa-trash"></button>
+                                          <a class="fa fa-search btn btn-info" href="{{ route('daftarsiswa', [$konsentrasi->jurusan->id ,$konsentrasi->id]) }}"></a>
                                         </td>
                                       <tr>
-                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

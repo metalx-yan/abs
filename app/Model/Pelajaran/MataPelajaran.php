@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Guru\Guru;
 use App\Model\Absen\Absen;
 use App\Model\Kelas\Konsentrasi;
+use App\Model\Pelajaran\TipePelajaran;
 use Carbon\Carbon;
 
 class MataPelajaran extends Model

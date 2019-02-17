@@ -70,7 +70,9 @@ class DataGuruController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = Guru::find($id);
+
+        return view('pages.kesiswaan._guru.edit', compact('edit'));
     }
 
     /**
@@ -82,7 +84,15 @@ class DataGuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = Guru::findOrFail($id);
+        $update->nip = $request->nip;
+        $update->kode = $request->kode;
+        $update->nama = $request->nama;
+        $update->user_id = $request->user_id;
+        $update->save();
+
+        return back();
+
     }
 
     /**

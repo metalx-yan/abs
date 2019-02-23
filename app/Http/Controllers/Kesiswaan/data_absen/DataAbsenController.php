@@ -18,13 +18,12 @@ class DataAbsenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listAbsen()
+    public function listAbsen(Request $request)
     {
         $jurusan = Jurusan::all();
-        // $siswa = Konsentrasi::find($siswa);
         $absen = Absen::all();
-
-        return view('pages.kesiswaan._absen.listAbsen', compact('jurusan','siswa', 'absen'));
+        $req = $request->all();
+        return view('pages.kesiswaan._absen.listAbsen', compact('jurusan','siswa', 'absen', 'req'));
     }
 
     /**

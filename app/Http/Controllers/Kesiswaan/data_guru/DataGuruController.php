@@ -116,7 +116,7 @@ class DataGuruController extends Controller
         $guru = Guru::find($id);
         $mp = MataPelajaran::find($request->mata_pelajaran_id);
         foreach ($request->hari as $hari) {
-            $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari, 'jam' => $request->all()["time-" . $hari]]);
+            $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari]);
         }
 
         return redirect()->back()->with('sweetalert', 'Berhasil Mengatur');

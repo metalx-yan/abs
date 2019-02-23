@@ -27,7 +27,7 @@ class MataPelajaran extends Model
     }
     public function gurus()
     {
-        return $this->belongsToMany(Guru::class)->withPivot(['hari', 'jam']);
+        return $this->belongsToMany(Guru::class)->withPivot(['hari']);
     }
     public static function hari()
     {

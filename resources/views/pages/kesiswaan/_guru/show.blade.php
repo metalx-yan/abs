@@ -53,7 +53,6 @@
                                     <h4 class="brief"><i>Mata Pelajaran : {{ $mapel->pelajaran }}</i></h4>
                                         <div class="left col-xs-7">
                                             <h2>Hari : {{ $mapel->pivot->hari }}</h2>
-                                            <p><strong>Total Jam : {{ $mapel->pivot->jam }}</strong> </p>
                                         </div>
                                 </div>
                                 <div class="col-xs-12 bottom text-center">
@@ -155,76 +154,6 @@
 @endsection
 
 @push('js_body')
-<script>
-  $(document).ready(function () {
-    console.log('Script ready')
-    var senin = $('#senin');
-    var selasa = $('#selasa');
-    var rabu = $('#rabu');
-    var kamis = $('#kamis');
-    var jumat = $('#jumat');
-    var cont = $('#time-cont');
-
-    senin.on('ifChecked', function () {
-      addTime('time-senin', 'Senin');
-    });
-
-    selasa.on('ifChecked', function () {
-      addTime('time-selasa', 'Selasa');
-    });
-
-    rabu.on('ifChecked', function () {
-      addTime('time-rabu', 'Rabu');
-    });
-
-    kamis.on('ifChecked', function () {
-      addTime('time-kamis', 'Kamis');
-    });
-
-    jumat.on('ifChecked', function () {
-      addTime('time-jumat', 'Jumat');
-    });
-
-    senin.on('ifUnchecked', function () {
-      removeTime('time-senin');
-    });
-
-    selasa.on('ifUnchecked', function () {
-      removeTime('time-selasa');
-    });
-
-    rabu.on('ifUnchecked', function () {
-      removeTime('time-rabu');
-    });
-
-    kamis.on('ifUnchecked', function () {
-      removeTime('time-kamis');
-    });
-
-    jumat.on('ifUnchecked', function () {
-      removeTime('time-jumat');
-    });
-
-    function addTime(tag, label) {
-      cont.append(`
-        <div class="row" id="` + tag +`">
-          <div class="col-md-4">
-            <label class="label-control">` + label + `</label>
-          </div>
-          <div class="col-md-8">
-            <input name="` + tag + `" type="time" required="required" class="form-control col-md-3x col-xs-12">
-          </div>
-        </div>
-      `);
-    }
-
-    function removeTime(tag) {
-      $('#' + tag).remove();
-    }
-  })
-</script>
-
-@section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     @if(Session::has('sweetalert'))
@@ -247,5 +176,4 @@
         });
     </script>
 
-@endsection
 @endpush

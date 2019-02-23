@@ -21,21 +21,24 @@
                     <br>
                     <div class="row">
                             <div class="form-group">
+                                <form action="{{ route('listAbsen') }}" method="GET">
+                                    @csrf
                                     <div class="col-md-3">
-                                        <select id="category" name="jurusan_id" class="select2_single form-control" tabindex="-1">
+                                        <select id="jurusan" name="jurusan_id" class="select2_single form-control" tabindex="-1">
+                                            <option value="0">--- Pilih ---</option>
                                             @foreach (App\Model\Kelas\Jurusan::all() as $jur)
                                                 <option value="{{ $jur->id }}">{{ $jur->tingkatan->tingkatan }} {{ $jur->jurusan }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <select id="subcategory" name="jurusan_id" class="select2_single form-control" tabindex="-1">
-                                            {{-- @foreach ($jurusan as $jur) --}}
-                                                <option value="{{-- {{ $jur->id }} --}}">{{-- {{ $jur->tingkatan->tingkatan }} {{ $jur->jurusan }} --}}</option>
-                                            {{-- @endforeach --}}
+                                        <select id="konsentrasi" name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
+                                            <option value="0">--- Pilih ---</option>
                                         </select>
                                     </div>
-                            </div> 
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </form>
+                            </div>
                     </div>
 
                     <br>
@@ -45,58 +48,51 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="x_panel">
+                                    @if (app('request')->input('_token'))
                                     <table class="table table-striped projects" id="">
+                                        @php
+                                            $i = 1;
+                                            $konsentrasi = App\Model\Kelas\Konsentrasi::find(app('request')->input('konsentrasi_id'));
+                                        @endphp
                                         <thead>
-                                          <tr>
-                                            <th style="width: 1%">No.</th>
-                                            <th>NIS</th>
-                                            <th>Nama Siswa</th>
-                                            <th>1</th>
-                                            <th>2</th>
-                                            <th>3</th>
-                                            <th>4</th>
-                                            <th>5</th>
-                                            <th>6</th>
-                                            <th>7</th>
-                                            <th>8</th>
-                                            <th>9</th>
-                                            <th>10</th>
-                                            <th>11</th>
-                                            <th>12</th>
-                                            <th>13</th>
-                                            <th>14</th>
+                                            <tr>
+                                                <th style="width: 1%">No.</th>
+                                                <th>NIS</th>
+                                                <th>Nama Siswa</th>
+                                                @foreach ($konsentrasi->pertemuans as $pertemuan)
+                                                  <th class="column-title">{{ $pertemuan->pertemuan }}</th>
+                                                @endforeach
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                    <td class=""></td>
-                                                    <td class="" id="nis" style="padding-top: 10px"></td><br>
-                                                    <td class="" id="nama"></td>
-                                                    <td class="" id="absen"></td>
-                                                    <td class="" id="hadir"></td>
-                                                </tr>
+                                            @foreach ($konsentrasi->siswas as $siswa)
+                                            <tr class="even pointer">
+                                                <td class="a-center">{{ $i }}</td>
+                                                <td>{{ $siswa->nis }}</td>
+                                                <td>{{ $siswa->nama }}</td>
+                                                @forelse($konsentrasi->pertemuans as $pertemuan)
+                                                  <td>
+                                                    @if (!is_null($pertemuan->absens->where('siswa_id', $siswa->id)->first()))
+                                                      <input type="checkbox" class="flat" disabled="disabled" checked="checked">
+                                                      @else
+                                                      <input type="checkbox" class="flat" disabled="disabled">
+                                                    @endif
+                                                  </td>
+                                                  @empty
+                                                  <td>
+                                                    <input id="{{ '1-' .$siswa->id }}" type="checkbox" class="flat" 
+                                                      {{ is_null($siswa->absens->where('pertemuan', 1)->first()) ? '' : 'checked="true"' }}
+                                                      name="siswa[]" value="{{ $siswa->id }}">
+                                                  </td>
+                                                @endforelse
+                                              </tr>
+                                              @php
+                                                $i++;
+                                              @endphp
+                                            @endforeach
                                         </tbody>
                                     </table>
-
-                                {{-- <table class="table table-striped projects">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20%">Jurusan</th>
-                                            <th style="width: 20%"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($jurusan as $jurusan)
-                                        <tr>
-                                            <td class="">{{ $jurusan->tingkatan->tingkatan }} {{ $jurusan->jurusan }}</td>
-                                            <td style="padding-left: 500px;">
-                                                <a class="fa fa-search btn btn-info" href="{{ route('daftarKonsen', $jurusan->id) }}"></a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table> --}}
-
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -116,54 +112,16 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
- <script>
-            $('#category').on('change', function(e){
-                console.log(e);
-                var a_id = e.target.value;
-                jQuery.get('/ajax-subcat?a_id=' + a_id, function(data) {
-                    //success data
-                    $('#subcategory').empty();
-                    jQuery.each(data, function(index, subcatObj){
-                        $('#subcategory').append('<option value="'+subcatObj.id+'">'+subcatObj.konsentrasi+' '+subcatObj.subbagian+'</option>');
-                    });
+    <script>
+        $('#jurusan').on('change', function(e){
+            var a = e.target.value;
+            jQuery.get('/api/konsentrasis/' + a, function(data) {
+                $('#konsentrasi').empty();
+                jQuery.each(data, function(index, obj){
+                    $('#konsentrasi').append('<option value="'+obj.id+'">'+obj.konsentrasi+' '+obj.subbagian+'</option>');
                 });
             });
-
-            $('#subcategory').on('change', function(e){
-                console.log(e);
-                var b_id = e.target.value;
-                jQuery.get('/ajax-subcaty?b_id=' + b_id, function(data) {
-                    //success data
-                    $('#nis').empty();
-                    jQuery.each(data, function(index, subcatObj){
-                        $('#nis').append('<option value="'+subcatObj.id+'">'+subcatObj.nis+'</option>');
-                    });
-                });
-            });
-
-            $('#subcategory').on('change', function(e){
-                console.log(e);
-                var b_id = e.target.value;
-                jQuery.get('/ajax-subcaty?b_id=' + b_id, function(data) {
-                    //success data
-                    $('#nama').empty();
-                    jQuery.each(data, function(index, subcatObj){
-                        $('#nama').append('<option value="'+subcatObj.id+'">'+subcatObj.nama+'</option>');
-                    });
-                });
-            });
-
-            $('#subcategory').on('change', function(e){
-                console.log(e);
-                var b_id = e.target.value;
-                jQuery.get('/ajax-absen?b_id=' + b_id, function(data) {
-                    //success data
-                    $('#hadir').empty();
-                    jQuery.each(data, function(index, subcatObj){
-                        $('#hadir').append('<option value="'+subcatObj.id+'">'+subcatObj.id+'</option>');
-                    });
-                });
-            });
-        </script>
+        });
+    </script>
 
 @endsection

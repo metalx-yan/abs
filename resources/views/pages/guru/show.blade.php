@@ -80,7 +80,7 @@
                                     <input id="{{ '1-' .$siswa->id }}" type="checkbox" class="flat" 
                                       {{ is_null($siswa->absens->where('pertemuan', 1)->first()) ? '' : 'checked="true"' }}
                                       name="siswa[]" value="{{ $siswa->id }}">
-                                  </td
+                                  </td>
                                 @endforelse
                               </tr>
                               @php

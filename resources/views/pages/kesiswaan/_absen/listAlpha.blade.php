@@ -19,134 +19,81 @@
         <div class="x_content">
           <p>Daftar absen siswa dikelas masing-masing sesuai dengan absen yang setiap hari dilakukan.</a></p>
           <br>
-
-          <div class="clearfix"></div>
-
-          <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="x_panel">
-
-                            <table class="table table-striped projects">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 20%">Jurusan</th>
-                                        <th style="width: 20%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($jurusan as $jurusan)
-                                    <tr>
-                                        <td class="">{{ $jurusan->tingkatan->tingkatan }} {{ $jurusan->jurusan }}</td>
-                                        <td style="padding-left: 500px;">
-                                            <a class="fa fa-search btn btn-info" href="{{ route('listKonsen', $jurusan->id) }}"></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                </div>
+          <div class="row">
+              <div class="form-group">
+                  <form action="{{ route('listAlpha') }}" method="GET">
+                      @csrf
+                      <div class="col-md-3">
+                          <select id="jurusan" name="jurusan_id" class="select2_single form-control" tabindex="-1">
+                              <option value="0">--- Pilih ---</option>
+                              @foreach (App\Model\Kelas\Jurusan::all() as $jur)
+                                  <option value="{{ $jur->id }}">{{ $jur->tingkatan->tingkatan }} {{ $jur->jurusan }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="col-md-3">
+                          <select id="konsentrasi" name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
+                              <option value="0">--- Pilih ---</option>
+                          </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Cari</button>
+                  </form>
               </div>
-            </div>
           </div>
-
-
           <div class="row">
             <div class="col-md-12">
               <div class="x_panel">
-                <table class="table table-striped projects">
+                @if (app('request')->input('_token'))
+                <table class="table table-striped projects" id="">
+                    @php
+                        $i = 1;
+                        $konsentrasi = App\Model\Kelas\Konsentrasi::find(app('request')->input('konsentrasi_id'));
+                    @endphp
                     <thead>
-                      <tr>
-                        <th style="width: 1%">No.</th>
-                        <th>NIS</th>
-                        <th style="width: 20%">Nama Siswa</th>
-                        <th style="width: 20%">1</th>
-                        <th style="width: 20%">2</th>
-                        <th style="width: 20%">3</th>
-                        <th style="width: 20%">4</th>
-                        <th style="width: 20%">5</th>
-                        <th style="width: 20%">6</th>
-                        <th style="width: 20%">7</th>
-                        <th style="width: 20%">8</th>
-                        <th style="width: 20%">9</th>
-                        <th style="width: 20%">10</th>
-                        <th style="width: 20%">11</th>
-                        <th style="width: 20%">12</th>
-                        <th style="width: 20%">13</th>
-                        <th style="width: 20%">14</th>
+                        <tr>
+                            <th style="width: 1%">No.</th>
+                            <th>NIS</th>
+                            <th>Nama Siswa</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                      {{-- @foreach ($absensis as $absensi) --}}
-                        @foreach ($siswa->siswas as $siswa)
-                      <tr>
-                        <td class=""></td>
-                        <td class="">{{ $siswa->nis }}</td>
-                        <td class="">{{ $siswa->nama }}</td>
-                        @foreach ($siswa->absens as $absen)
-                          {{-- expr --}}
-                          @if ($absen->pertemuan)
-                            {{-- expr --}}
-                            <td class="">Hadir</td>
-                            @elseif($absen->pertemuan)
-                              {{-- expr --}}
-                            <td class="">Nggak Hadir</td>
-                          @endif
+                        @foreach ($konsentrasi->siswas as $siswa)
+                          <tr>
+                            <td>#</td>
+                            <td>
+                              <a>{{ $siswa->nama }}</a>
+                            </td>
+                            <td>
+                              <a href="">{{ $siswa->fullKelas() }}</a>
+                            </td>
+                            <td class="project_progress">
+                              <div class="progress progress_sm">
+                                <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="{{ $siswa->persentaseKetidakhadiran() }}"></div>
+                              </div>
+                              <small>{{ $siswa->persentaseKetidakhadiran() }} %</small>
+                            </td>
+                           <td>
+                              @if ($siswa->smsable())
+                                @if ($siswa->persentaseKetidakhadiran() > 29 and $siswa->persentaseKetidakhadiran() < 50)
+                                  <button class="btn btn-primary btn-xs" onclick="smsSP1({{ $siswa->id }})">{{ $siswa->keterangan() }}</button>
+                                @endif
+                                @if ($siswa->persentaseKetidakhadiran() > 49 and $siswa->persentaseKetidakhadiran() < 79)
+                                  <button class="btn btn-primary btn-xs" onclick="smsSP2({{ $siswa->id }})">{{ $siswa->keterangan() }}</button>
+                                @endif
+                                @if ($siswa->persentaseKetidakhadiran() > 79)
+                                  <button class="btn btn-primary btn-xs" onclick="smsPemanggilan({{ $siswa->id }})">{{ $siswa->keterangan() }}</button>
+                                @endif
+                              @endif
+                            </td>
+                          </tr>
+                          @php
+                            $i++;
+                          @endphp
                         @endforeach
-                            
-                          @endforeach
-                          
-                      
-                      </tr>
                     </tbody>
                   </table>
-
-                  <!-- start project list -->
-                  <table class="table table-striped projects">
-                    <thead>
-                      <tr>
-                        <th style="width: 1%">No.</th>
-                        <th style="width: 20%">Nama Siswa</th>
-                        <th>Kelas</th>
-                        <th>Presentase Ketidakhadrian</th>
-                        <th>Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($absensis as $absensi)
-                      <tr>
-                        <td>#</td>
-                        <td>
-                          <a>{{ $absensi->first()->siswa->nama }}</a>
-                        </td>
-                        <td>
-                          <a href="">{{ $absensi->first()->siswa->fullKelas() }}</a>
-                        </td>
-                        <td class="project_progress">
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="{{ $absensi->first()->siswa->persentaseKetidakhadiran() }}"></div>
-                          </div>
-                          <small>{{ $absensi->first()->siswa->persentaseKetidakhadiran() }} %</small>
-                        </td>
-                       <td>
-                          @if ($absensi->first()->siswa->smsable())
-                            @if ($absensi->first()->siswa->persentaseKetidakhadiran() > 29 and $absensi->first()->siswa->persentaseKetidakhadiran() < 50)
-                              <button class="btn btn-primary btn-xs" onclick="smsSP1({{ $absensi->first()->siswa->id }})">{{ $absensi->first()->siswa->keterangan() }}</button>
-                            @endif
-                            @if ($absensi->first()->siswa->persentaseKetidakhadiran() > 49 and $absensi->first()->siswa->persentaseKetidakhadiran() < 79)
-                              <button class="btn btn-primary btn-xs" onclick="smsSP2({{ $absensi->first()->siswa->id }})">{{ $absensi->first()->siswa->keterangan() }}</button>
-                            @endif
-                            @if ($absensi->first()->siswa->persentaseKetidakhadiran() > 79)
-                              <button class="btn btn-primary btn-xs" onclick="smsPemanggilan({{ $absensi->first()->siswa->id }})">{{ $absensi->first()->siswa->keterangan() }}</button>
-                            @endif
-                          @endif
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
+                @endif
               </div>
             </div>
           </div>
@@ -191,4 +138,21 @@
       });
     }
 </script>
+@endsection
+@section('scripts')
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script>
+        $('#jurusan').on('change', function(e){
+            var a = e.target.value;
+            jQuery.get('/api/konsentrasis/' + a, function(data) {
+                $('#konsentrasi').empty();
+                jQuery.each(data, function(index, obj){
+                    $('#konsentrasi').append('<option value="'+obj.id+'">'+obj.konsentrasi+' '+obj.subbagian+'</option>');
+                });
+            });
+        });
+    </script>
+
 @endsection

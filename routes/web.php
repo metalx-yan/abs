@@ -76,23 +76,6 @@ Route::group(['middleware' => ['auth']], function ()
 
 
 Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
-Route::get('/ajax-subcat', function() {
-	$a_id = Illuminate\Support\Facades\Input::get('a_id');
-    $subcategories = App\Model\Kelas\Konsentrasi::where('jurusan_id', $a_id)->get();
-    return Response::json($subcategories);
-});
-
-Route::get('/ajax-subcaty', function() {
-	$b_id = Illuminate\Support\Facades\Input::get('b_id');
-    $subcategories = App\Model\Siswa\Siswa::where('konsentrasi_id', $b_id)->get();
-    return Response::json($subcategories);
-});
-
-Route::get('/ajax-absen', function() {
-	$b_id = Illuminate\Support\Facades\Input::get('b_id');
-    $subcategories = App\Model\Absen\Absen::where('siswa_id', $b_id)->get();
-    return Response::json($subcategories);
-});
 
 Route::get('/daftarKonsen/{konsen}', 'Kesiswaan\data_absen\DataAbsenController@daftarKonsen')->name('daftarKonsen');
 Route::get('/daftarSiswa/{konsen}/{siswa}', 'Kesiswaan\data_absen\DataAbsenController@daftarSiswa')->name('daftarSiswa');

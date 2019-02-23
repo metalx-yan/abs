@@ -58,18 +58,12 @@ class Siswa extends Model
     public function keterangan()
     {
         $status = 'Aman';
-        switch ($this->persentaseKetidakhadiran()) {
-            case 30:
-                $status = 'Kirim Peringatan 1';
-                break;
-
-            case 50:
-                $status = 'Kirim Peringatan 2';
-                break;
-
-            case 80:
-                $status = 'Kirim Pemanggilan Orang Tua';
-                break;
+        if ($this->persentaseKetidakhadiran() > 29 and $this->persentaseKetidakhadiran() < 50) {
+            $status = 'Kirim Peringatan 1';
+        } else if ($this->persentaseKetidakhadiran() > 49 and $this->persentaseKetidakhadiran() < 80) {
+            $status = 'Kirim Peringatan 2';
+        } else if ($this->persentaseKetidakhadiran() > 79) {
+            $status = 'Kirim Pemanggilan Orang Tua';
         }
 
         return $status;

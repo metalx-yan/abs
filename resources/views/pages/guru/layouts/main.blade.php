@@ -1,6 +1,7 @@
 <html>
 
 @include('partials._head')
+
 <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -12,6 +13,8 @@
 
 @include('partials._footer')
 @include('partials._javascript')
+
+@yield('scripts')
 
 		</div>
 	</div>

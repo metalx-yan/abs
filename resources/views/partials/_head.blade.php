@@ -62,4 +62,5 @@
     <link href="{{ asset('/fonts/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/animate.min.css') }}" rel="stylesheet">
     
+    @yield('links')
   </head>

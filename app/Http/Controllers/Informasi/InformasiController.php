@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Kesiswaan\data_pelajaran;
+namespace App\Http\Controllers\Informasi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Pelajaran\MataPelajaran;
-use App\Model\Pelajaran\TipePelajaran;
-use App\Model\Kelas\Jurusan;
 
-class PelajaranController extends Controller
+class InformasiController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('pages.Informasi.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($tp)
+    public function create()
     {
-        $tp = TipePelajaran::find($tp);
-
-        $jurusan = Jurusan::all();
-
-        $pel = MataPelajaran::all();
-        // dd($pel);
-        return view('pages.kesiswaan._pelajaran.create', compact('tp', 'pel','jurusan'));
+        //
     }
 
     /**
@@ -32,13 +33,10 @@ class PelajaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($tp, Request $req)
+    public function store(Request $request)
     {
-        $tipe = TipePelajaran::find($tp)->mataPelajarans()->create($req->all());
-        return redirect()->route('kelas.create', $tipe->id)->with('sweetalert', 'Pelajaran Berhasil Ditambahkan');
+        //
     }
-
-   
 
     /**
      * Display the specified resource.
@@ -59,9 +57,7 @@ class PelajaranController extends Controller
      */
     public function edit($id)
     {
-        $mata = MataPelajaran::find($id);
-
-        return view('pages.kesiswaan._kelas', compact('mata'));
+        //
     }
 
     /**
@@ -82,11 +78,8 @@ class PelajaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $a)
+    public function destroy($id)
     {
-        $del = MataPelajaran::find($a);
-        $del->delete();
-
-        return redirect()->back()->with('sweetalert', 'Test');
+        //
     }
 }

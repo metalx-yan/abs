@@ -1,5 +1,9 @@
 @extends('pages.kesiswaan.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+
 @section('content')
 
 <!-- page content -->
@@ -91,9 +95,19 @@
                                         <td class=" ">{{ $guru->user->username }}</td>
                                         <td class="last" align="right_col">
                                             <div class="row">
-                                                <div class="col-md-12 col-md-offset-6">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-2 ">
                                                     <a href="{{ route('guru.edit', $guru->id) }}" class="fa fa-edit btn btn-success"></a>
-                                                    <button type="button" class="fa fa-trash btn btn-danger"></button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <form action="{{ route('guru.destroy', $guru->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="fa fa-trash btn btn-danger"></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    
                                                     <a href="{{ route('guru.show', $guru) }}" class="fa fa-list-ol btn btn-info" ></a>
                                                 </div>
                                             </div>
@@ -121,4 +135,16 @@
 
 <!-- /page content -->
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+  
 @endsection

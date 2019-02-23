@@ -1,5 +1,9 @@
 @extends('pages.kesiswaan.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+ 
 @section('content')
 
 <!-- page content -->
@@ -69,9 +73,20 @@
                                         <td class=" ">{{ $konsentrasi->konsentrasi }}</td>
                                         <td class=" ">{{ $konsentrasi->jurusan->tingkatan->tingkatan }} {{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</td>
                                         <td class="">
-                                          <button type="button" class="btn btn-success fa fa-edit"></button>
-                                          <button type="button" class="btn btn-danger fa fa-trash"></button>
-                                          <a href="{{ route('kelas.show', [$jurusan->id, $konsentrasi->id]) }}" class="btn btn-info fa fa-list-ol"></a>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-4">
+                                                        <form action="{{ route('kelas.destroy', [$konsentrasi->jurusan->id ,$konsentrasi->id]) }}" method="POST">
+                                                          @csrf
+                                                          @method("DELETE")
+                                                          <button type="submit" class="btn btn-danger fa fa-trash"></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                          <a href="{{ route('kelas.show', [$jurusan->id, $konsentrasi->id]) }}" class="btn btn-info fa fa-list-ol"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                       <tr>
                                     @endforeach
@@ -89,4 +104,17 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+    
+  
 @endsection

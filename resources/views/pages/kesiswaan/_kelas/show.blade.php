@@ -1,5 +1,9 @@
 @extends('pages.kesiswaan.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+
 @section('content')
 
 <div class="right_col" role="main">
@@ -89,4 +93,16 @@
     </div>
 </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+  
 @endsection

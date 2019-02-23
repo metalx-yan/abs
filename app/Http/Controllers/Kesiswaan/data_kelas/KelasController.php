@@ -1,13 +1,13 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Kesiswaan\data_kelas;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Model\Kelas\Tingkatan;
 use App\Model\Kelas\Jurusan;
 use App\Model\Kelas\Konsentrasi;
-use App\Model\Pelajaran\MataPelajaran;
+use App\Model\Pelajaran\MataPelajaran; 
 use App\Model\Siswa\Siswa;
 
 class KelasController extends Controller
@@ -33,7 +33,7 @@ class KelasController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */  
     public function create($jurusan_id)
     {
         $jurusan = Jurusan::find($jurusan_id);  
@@ -42,7 +42,7 @@ class KelasController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage. 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -53,7 +53,7 @@ class KelasController extends Controller
             'konsentrasi' => $request->konsentrasi,
             'subbagian' => $request->subbagian
         ]);
-        return redirect()->route('kelas.create', $jurusan->id);
+        return redirect()->route('kelas.create', $jurusan->id)->with('sweetalert', 'Data Kelas Telah Ditambahkan');
     }
 
     /**
@@ -93,16 +93,20 @@ class KelasController extends Controller
     {
         //
     }
-
+ 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $kons)
     {
-        //
+        // dd($kons);
+        $konsen = Konsentrasi::find($kons);
+        $konsen->delete();
+        // dd($konsen);
+        return redirect()->back()->with('sweetalert', 'Data Berhasil Dihapus');
     }
 
     public function attachMapel(Request $request, $jurusan, $kelas)
@@ -116,6 +120,6 @@ class KelasController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('sweetalert', 'Berhasil Mengatur');
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Kesiswaan\data_guru;
 
@@ -45,7 +45,7 @@ class DataGuruController extends Controller
         ]); 
 
 
-        return redirect()->route('guru.create');
+        return redirect()->route('guru.create')->with('sweetalert', 'Guru Berhasil Ditambahkan');
 
     }
 
@@ -84,6 +84,7 @@ class DataGuruController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $update = Guru::findOrFail($id);
         $update->nip = $request->nip;
         $update->kode = $request->kode;
@@ -91,7 +92,7 @@ class DataGuruController extends Controller
         $update->user_id = $request->user_id;
         $update->save();
 
-        return back();
+        return back()->with('sweetalert', 'Data Guru Berhasil Diubah');
 
     }
 
@@ -103,7 +104,11 @@ class DataGuruController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $del = Guru::find($id);
+
+        $del->delete();
+
+        return back()->with('sweetalert', 'Data Guru Berhasil Dihapus');
     }
 
     public function attachMataPelajaran(Request $request, $id)
@@ -114,6 +119,6 @@ class DataGuruController extends Controller
             $guru->mataPelajarans()->attach($mp, ['konsentrasi_id' => $request->konsentrasi_id, 'hari' => $hari, 'jam' => $request->all()["time-" . $hari]]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('sweetalert', 'Berhasil Mengatur');
     }
 }

@@ -1,5 +1,9 @@
 @extends('pages.kesiswaan.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -21,32 +25,36 @@
                             <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Kelas</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
+                                    <select name="konsentrasi_id" class="select2_single form-control {{ $errors->has('konsentrasi_id') ? 'is-invalid' : ''}}" tabindex="-1">
                                         @foreach ($jurusan->konsentrasis as $konsentrasi)
                                             <option value="{{ $konsentrasi->id }}">{{ $konsentrasi->konsentrasi }} {{ $konsentrasi->subbagian }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                {!! $errors->first('konsentrasi_id', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
                             <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nip">NIS</span></label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="email" name="nis" required="required" class="form-control col-md-7 col-xs-12">
+                                      <input type="text" id="email" name="nis" required="required" class="form-control col-md-7 col-xs-12 {{ $errors->has('nis') ? 'is-invalid' : ''}}">
                                   </div>
+                                {!! $errors->first('nis', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
                             <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama</span></label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input id="name" class="form-control col-md-8 col-xs-12" name="nama" required="required" type="text">
+                                      <input id="name" class="form-control col-md-8 col-xs-12 {{ $errors->has('nama') ? 'is-invalid' : ''}}" name="nama" required="required" type="text">
                                   </div>
+                                {!! $errors->first('nama', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
 
                             <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">No. Telepon Orang Tua </span>
                               </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="name" class="form-control col-md-8 col-xs-12"  name="no_hp_orangtua" required="required" type="text">
+                                    <input id="name" class="form-control col-md-8 col-xs-12 {{ $errors->has('no_hp_orangtua') ? 'is-invalid' : ''}}"  name="no_hp_orangtua" required="required" type="text">
                                 </div>
+                                {!! $errors->first('no_hp_orangtua', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
 
                             <div class="form-group">
@@ -99,4 +107,16 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+  
 @endsection

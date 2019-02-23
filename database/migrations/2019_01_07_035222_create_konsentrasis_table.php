@@ -21,7 +21,7 @@ class CreateKonsentrasisTable extends Migration
         });
         Schema::table('konsentrasis', function (Blueprint $table) {
             $table->unsignedInteger('jurusan_id');
-            $table->foreign('jurusan_id')->references('id')->on('jurusans');
+            $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('cascade');
         });
     }
 

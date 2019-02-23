@@ -41,12 +41,16 @@ class SiswaController extends Controller
     public function store($jurusan_id, Request $request)
     {
         // dd($request);
+        $this->validate($request, [
+            'nis'=>'required|unique:siswas',
+            'no_hp_orangtua'=>'required|unique:siswas'
+        ]);
         $jurusan = Jurusan::find($jurusan_id);
         // dd($jurusan);
         $jurusan->konsentrasis->find($request->konsentrasi_id)->siswas()->create(
             $request->all()
         );
-        return redirect()->route('siswa.create', $jurusan->id);
+        return redirect()->route('siswa.create', $jurusan->id)->with('sweetalert', 'Data Siswa Berhasil Ditambahkan');
     }
 
     /**
@@ -81,7 +85,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) 
     {
         $update = Siswa::findOrFail($id);
         $update->nis = $request->nis;
@@ -91,7 +95,7 @@ class SiswaController extends Controller
         $update->save();
 
 
-        return redirect()->route('daftarsiswa', [$update->id, $update->konsentrasi->id]);
+        return redirect()->route('daftarsiswa', [$update->id, $update->konsentrasi->id])->with('sweetalert', 'Data Siswa Berhasil Diubah');
     }
 
     /**
@@ -100,12 +104,12 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $a)
     {
-        $siswa = Siswa::find($id);
-
+        $siswa = Siswa::find($a);
+        // dd($siswa);
         $siswa->delete();
 
-        return back();
+        return back()->with('sweetalert', 'Data Siswa Berhasil Dihapus');
     }
 }

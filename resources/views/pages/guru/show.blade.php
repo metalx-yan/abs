@@ -1,5 +1,9 @@
 @extends('pages.guru.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+
 @section('content')
 <!-- page content -->
         <div class="right_col" role="main">
@@ -18,7 +22,7 @@
             <div class="row">
               
 
-
+ 
               <div class="clearfix"></div>
 
               
@@ -110,7 +114,7 @@
                                       <th class="column-title">Alasan Tidak Hadir </th>
                                       <th class="column-title no-link last"><span class="nobr"></span></th>
                                     </tr>
-                                  </thead>
+                                  </thead> 
 
                                   <tbody>
                                     @php
@@ -123,19 +127,23 @@
                                         <td class="">{{ $absensi->siswa->nis }}</td>
                                         <td class="">{{ $absensi->siswa->nama }}</td>
                                         <td class="">
+                                        <form action="{{ route('beranda.update', $absensi->id) }}" method="POST">
                                           <div class="row">
-                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'sakit' ? 'checked' : null }}> Sakit
-                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'izin' ? 'checked' : null }}> Izin
-                                              <input type="radio" class="flat" name="keterangan-{{ $absensi->siswa->id }}" {{ $absensi->keterangan == 'alpha' ? 'checked' : null }}> Tanpa Keterangan
+                                              <input value="izin" type="radio" class="flat" name="keterangan" {{ $absensi->keterangan == 'izin' ? 'checked' : null }}> Izin
+                                              <input value="sakit" type="radio" class="flat" name="keterangan" {{ $absensi->keterangan == 'sakit' ? 'checked' : null }}> Sakit
+                                              <input value="alpha" type="radio" class="flat" name="keterangan" {{ $absensi->keterangan == 'alpha' ? 'checked' : null }}> Tanpa Keterangan
                                           </div>
                                         </td>
-                                        <td class=" last">
-                                          <button type="button" class="btn btn-success">Ubah Status</button>
+                                        <td class="last">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success">Ubah Status</button>
+                                          </form>
                                           @if ($absensi->keterangan == 'alpha')
                                             <button type="button" onclick="kirimSMS({{ $absensi->siswa->id }})" class="btn btn-success">Kirim SMS</button>
                                           @endif
                                         </td>
-                                      </tr>
+                                       </tr>
                                       @php
                                         $pijet ++;
                                       @endphp
@@ -185,3 +193,16 @@
 
   </script>
 @endpush
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+    
+  
+@endsection

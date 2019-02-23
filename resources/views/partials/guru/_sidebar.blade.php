@@ -1,17 +1,23 @@
  <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
-    <div class="navbar nav_title" style="border: 0;">
-    </div>
-
     <div class="clearfix"></div>
 
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="navbar nav_title" style="border: 0;">
-        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Monitoring</span></a>
+        <a href="index.html" class="site_title"><i class="fa fa-laptop"></i><span> Monitoring</span></a>
       </div>
     </div>
     <!-- /menu profile quick info -->
+    <div class="profile clearfix">
+        <div class="profile_pic">
+          <img src="{{ asset('images\logo-smkn.gif') }}" alt="..." class="img-circle profile_img">
+        </div>
+        <div class="profile_info">
+          <span>Welcome,</span>
+          <h2>{{ auth::user()->guru->nama }}</h2>
+        </div>
+      </div>
     <br />
 
     <!-- sidebar menu -->
@@ -19,8 +25,13 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
+          <li><a href="#"><i class="fa fa-edit"></i> Absen Siswa<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="{{ route('absen') }}">Daftar Hadir</a></li>
+              <li><a href="{{ route('absensi') }}">Daftar Tidak Hadir</a></li>
+            </ul>
+          </li>
           <li><a href="{{ route('beranda.index') }}"><i class="fa fa-home"></i> Absen Kelas</span></a></li>
-          <li><a href="{{ route('beranda.create') }}"><i class="fa fa-edit"></i> Absen Siswa </span></a></li>
          
         </ul>
       </div>

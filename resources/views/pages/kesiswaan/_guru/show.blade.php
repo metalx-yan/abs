@@ -1,5 +1,9 @@
 @extends('pages.kesiswaan.layouts.main')
 
+@section('links')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">  
+@endsection
+
 @section('content')
 
 <div class="right_col" role="main">
@@ -27,9 +31,6 @@
                                                     <th class="column-title">NIP </th>
                                                     <th class="column-title">Kode </th>
                                                     <th class="column-title">Nama </th>
-                                                    <th class="column-title">Email </th>
-                                                    <th class="column-title">Username </th>
-                                                    <th class="column-title no-link last"><span class="nobr">Action</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -37,8 +38,6 @@
                                                   <td class=" ">{{ $guru->nip }}</td>
                                                   <td class=" ">{{ $guru->kode }}</td>
                                                   <td class=" ">{{ $guru->nama }}</td>
-                                                  <td class=" ">{{ $guru->email }}</td>
-                                                  <td class=" ">{{ $guru->username }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -85,11 +84,12 @@
                                     <form class="form-horizontal form-label-left" action="{{ route('guru.mata_pelajaran', $guru->id) }}" method="post">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-6">Konsentrasi</label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-6">Kelas</label>
                                                 <div class="col-md-6 col-sm-3 col-xs-12">
-                                                    <select class="form-control" name="konsentrasi_id">
+                                                    <select class="form-control" name="konsentrasi_id" id="konsentrasi">
+                                                        <option value="0">-- Pilih --</option>
                                                         @foreach ($konsentrasi as $k)
-                                                            <option value="{{ $k->id }}">{{ $k->subbagian . ' - ' . $k->konsentrasi }}</option>
+                                                            <option value="{{ $k->id }}">{{ $k->konsentrasi . ' - ' . $k->subbagian }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -97,10 +97,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-6">Mata Pelajaran</label>
                                                 <div class="col-md-6 col-sm-3 col-xs-12">
-                                                    <select class="form-control" name="mata_pelajaran_id">
-                                                        @foreach (App\Model\Pelajaran\MataPelajaran::all() as $pelajaran)
-                                                            <option value="{{ $pelajaran->id }}">{{ $pelajaran->pelajaran }}</option>
-                                                        @endforeach
+                                                    <select class="form-control" name="mata_pelajaran_id" id="mata_pelajaran">
+                                                        <option value="0">-- Pilih --</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -137,7 +135,7 @@
                                             <div class="col-md-3 col-sm-9 col-xs-12 form-group">
                                                 <div id="time-cont"></div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="form-group">
                                             <hr>
                                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -180,7 +178,7 @@
     });
 
     kamis.on('ifChecked', function () {
-      addTime('time-kamis', 'Kemis');
+      addTime('time-kamis', 'Kamis');
     });
 
     jumat.on('ifChecked', function () {
@@ -225,4 +223,29 @@
     }
   })
 </script>
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @if(Session::has('sweetalert'))
+      <script>
+          swal('Success!!', '{{ Session::get('sweetalert') }}', 'success');
+      </script>
+      {{-- <?php Session::forget('sweetalert'); ?> --}}
+    @endif
+  
+    <script>
+        $('#konsentrasi').on('change', function(e){
+            console.log(e.target.value);
+            var cat_id = e.target.value;
+            jQuery.get('/api/konsentrasi/' + cat_id + '/mata-pelajaran', function(data) {
+                $('#mata_pelajaran').empty();
+                jQuery.each(data, function(index, obj){
+                    $('#mata_pelajaran').append('<option value="'+ obj.id+'">'+ obj.pelajaran +' </option>');
+                });
+            });
+        });
+    </script>
+
+@endsection
 @endpush

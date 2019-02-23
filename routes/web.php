@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/persentase', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
 
-
-
+// Route::get('/ajax-subcat', function() {
+// 	$cat_id = Illuminate\Support\Facades\Input::get('cat_id');
+//     $subcategories = App\Model\Kelas\Konsentrasi::where('jurusan_id', $cat_id)->get();
+//     return Response::json($subcategories);
+// });
 
 
 Route::group(['middleware' => ['auth','guru']], function ()
@@ -28,6 +32,8 @@ Route::group(['middleware' => ['auth','guru']], function ()
 	Route::group(['prefix' => 'kelas/{kelas}'], function ()
 	{
 		Route::get('beranda/{id}/{hari}', 'Guru\GuruController@show')->name('beranda.show');
+
+		// Route::put('beranda/{id}/{hari}/update', 'Guru\GuruController@updaida')->name('updaida');
 	});
 });
 
@@ -70,5 +76,37 @@ Route::group(['middleware' => ['auth']], function ()
 
 
 Route::get('/listAbsen', 'Kesiswaan\data_absen\DataAbsenController@listAbsen')->name('listAbsen');
+Route::get('/ajax-subcat', function() {
+	$a_id = Illuminate\Support\Facades\Input::get('a_id');
+    $subcategories = App\Model\Kelas\Konsentrasi::where('jurusan_id', $a_id)->get();
+    return Response::json($subcategories);
+});
+
+Route::get('/ajax-subcaty', function() {
+	$b_id = Illuminate\Support\Facades\Input::get('b_id');
+    $subcategories = App\Model\Siswa\Siswa::where('konsentrasi_id', $b_id)->get();
+    return Response::json($subcategories);
+});
+
+Route::get('/ajax-absen', function() {
+	$b_id = Illuminate\Support\Facades\Input::get('b_id');
+    $subcategories = App\Model\Absen\Absen::where('siswa_id', $b_id)->get();
+    return Response::json($subcategories);
+});
+
+Route::get('/daftarKonsen/{konsen}', 'Kesiswaan\data_absen\DataAbsenController@daftarKonsen')->name('daftarKonsen');
+Route::get('/daftarSiswa/{konsen}/{siswa}', 'Kesiswaan\data_absen\DataAbsenController@daftarSiswa')->name('daftarSiswa');
+Route::get('/printData/{id}', 'Kesiswaan\data_absen\DataAbsenController@printData')->name('printData');
+
 Route::get('/listAlpha', 'Kesiswaan\data_absen\DataAbsenController@listAlpha')->name('listAlpha');
-// Route::get('/kirim', 'Kesiswaan\data_absen\DataAbsenController@kirim')->name('kirim');
+Route::get('/listKonsen/{konsen}', 'Kesiswaan\data_absen\DataAbsenController@listKonsen')->name('listKonsen');
+Route::get('/listSiswa/{konsen}/{siswa}', 'Kesiswaan\data_absen\DataAbsenController@listSiswa')->name('listSiswa');
+
+Route::get('pdf/absensi', 'PDFController@absensi')->name('pdf.absensi');
+
+Route::get('/absen', 'Guru\GuruController@absen')->name('absen');
+Route::get('/absensi', 'Guru\GuruController@absensi')->name('absensi');
+
+
+// Informasi Siswa dan Orang Tua
+Route::resource('informasi', 'Informasi\InformasiController');

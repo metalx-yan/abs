@@ -35,4 +35,10 @@ class ApiController extends Controller
         ]);
         return response()->json($absen);
     }
+
+    public function mataPelajaran($konsentrasi)
+    {
+        $jurusan = Konsentrasi::find($konsentrasi);
+        return response()->json($jurusan->mata_pelajarans);
+    }
 }

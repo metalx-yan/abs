@@ -32,8 +32,9 @@
                           <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kelas">Sub Bagian</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="name" class="form-control col-md-7 col-xs-12" name="subbagian" required="required" type="text">
+                                <input id="name" class="form-control col-md-7 col-xs-12 {{ $errors->has('subbagian') ? 'is-invalid' : ''}}" name="subbagian" required="required" type="text">
                               </div>
+                                {!! $errors->first('subbagian', '<span class="invalid-feedback">:message</span>') !!}
                           </div>
                           <input type="hidden" name="jurusan_id" value="">
                           <div class="form-group">

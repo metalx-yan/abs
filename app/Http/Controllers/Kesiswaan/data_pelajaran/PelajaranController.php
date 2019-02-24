@@ -34,6 +34,9 @@ class PelajaranController extends Controller
      */
     public function store($tp, Request $req)
     {
+        $this->validate($req, [
+            'kode' => 'unique:mata_pelajarans'
+        ]);
         $tipe = TipePelajaran::find($tp)->mataPelajarans()->create($req->all());
         return redirect()->route('kelas.create', $tipe->id)->with('sweetalert', 'Pelajaran Berhasil Ditambahkan');
     }

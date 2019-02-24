@@ -8,16 +8,18 @@ use App\Model\Siswa\Siswa;
 use App\Model\Kelas\Tingkatan;
 use App\Model\Kelas\Jurusan;
 use App\Model\Kelas\Konsentrasi;
+use App\Model\Absen\Pertemuan;
 
 
 class PDFController extends Controller
 {
-	public function absensi()
+	public function absensi($siswaid)
 	{
-		$data['siswa'] = Siswa::first();
+		$data['siswa'] = Siswa::all();
 		$tingkat['tingkat'] = Tingkatan::first();
-		$kelas['kelas'] = Konsentrasi::first();
-		$pdf = PDF::loadView('pdf.absensi', $data, $kelas, $tingkat);
+		$kelas['kelas'] = Konsentrasi::find($siswaid);
+		$kelasabsen['kelasabsen'] = Konsentrasi::find($siswaid);
+		$pdf = PDF::loadView('pdf.absensi', $data, $kelas, $tingkat , $kelasabsen);
 		return $pdf->stream('invoice.pdf');
 	}
 

@@ -73,8 +73,8 @@
 
 <table width="100%">
 <tr>
-<td width="16" align="center"><img src="https://pbs.twimg.com/profile_images/611776817645531137/yF_sL8eo.jpg" width="120%" height="120%"></td>
-<td width="20" align="center"><h3>DAFTAR ABSENSI SISWA</h3><br><h3>{{ $kelas->konsentrasi }} {{ $kelas->subbagian }}</h3><h3>SMK Negeri 4 Kota Tangerang</h3></td>
+<td width="25" align="center"><img src="Tes.jpg" width="60%"></td>
+<td width="50" align="center"><h3>DAFTAR ABSENSI SISWA</h3><br><h3>{{ $kelas->konsentrasi }} {{ $kelas->subbagian }}</h3><h3>SMK Negeri 4 Kota Tangerang</h3></td>
 <td width="25" align="center"><img src="Logo DN.jpg" width="100%"></td>
 </tr>
 </table>
@@ -107,14 +107,14 @@
         </tr>
         </thead>
         <tbody>
-            @foreach ($kelas->siswas as $siswa)
+            @foreach ($kelasabsen->siswas as $siswa)
 
                 {{-- expr --}}
             <tr>
                     {{-- expr --}}
                     <td>{{ $siswa->nis }}</td>
                     <td>{{ $siswa->nama }}</td>
-                    @forelse ($kelas->pertemuans as $pertemuan)
+                    @forelse ($kelasabsen->pertemuans as $pertemuan)
                 <td>
                     @if (!is_null($pertemuan->absens->where('siswa_id', $siswa->id)->first()))
                         <input type="checkbox" class="flat" disabled="disabled" checked="checked">

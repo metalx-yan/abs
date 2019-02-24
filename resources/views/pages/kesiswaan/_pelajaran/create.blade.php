@@ -41,8 +41,10 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="name" class="form-control col-md-8 col-xs-12" name="kode" required="required" type="text">
+                                        <input id="name" class="form-control col-md-8 col-xs-12 {{ $errors->has('kode') ? 'is-invalid' : ''}}" name="kode" required="required" type="text">
                                     </div>
+                                {!! $errors->first('kode', '<span class="invalid-feedback">:message</span>') !!}
+
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Pelajaran</label>

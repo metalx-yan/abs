@@ -73,6 +73,7 @@ class SiswaController extends Controller
      */
     public function edit($majorid, $id)
     {
+        dd($id);
         $update = Siswa::find($id);
 
         return view('pages.kesiswaan._siswa.edit', compact('update'));

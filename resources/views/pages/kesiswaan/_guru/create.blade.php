@@ -30,32 +30,36 @@
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nip">NIP <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="nip" name="nip" required="required" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" id="nip" name="nip" class="form-control col-md-7 col-xs-12 {{ $errors->has('nip') ? 'is-invalid' : ''}}">
                                     </div>
+                                {!! $errors->first('nip', '<span class="invalid-feedback">:message</span>') !!}
+
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode">Kode <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="kode" name="kode" required="required" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" id="kode" name="kode" class="form-control col-md-7 col-xs-12 {{ $errors->has('kode') ? 'is-invalid' : ''}}">
                                     </div>
+                                    {!! $errors->first('kode', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="nama" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="nama" required="required" type="text">
+                                        <input id="nama" class="form-control col-md-7 col-xs-12 {{ $errors->has('nama') ? 'is-invalid' : ''}} " name="nama" type="text">
                                     </div>
+                                    {!! $errors->first('nama', '<span class="invalid-feedback">:message</span>') !!}
                             </div>
                           
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="name" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="username" required="required" type="text">
+                                        <input id="name" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="username"  type="text">
                                     </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">password <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="name" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="password" required="required" type="password">
+                                        <input id="name" class="form-control col-md-8 col-xs-12" data-validate-length-range="6" name="password"  type="password">
                                     </div>
                             </div>
                             <div class="form-group">

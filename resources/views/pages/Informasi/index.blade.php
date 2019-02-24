@@ -31,23 +31,25 @@
                       <h4 class="error-number">Informasi Absensi Siswa</h4>
                           <h2>SMK Negeri 4 Kota Tangerang</h2>
                               
-                              {{-- x_content --}}
                               <div class="x_content">
-                                  <form class="form-horizontal form-label-left" novalidate action="{{-- {{ route('pelajaran.store', $tp->id) }} --}}" method="POST">
+                                  <form class="form-horizontal form-label-left" novalidate action="{{ route('informasi.index') }}" method="GET">
                                       @csrf
                                           <div class="form-group">
                                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Tingkatan dan Jurusan</label>
                                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                                      <select id="category" name="jurusan_id" class="select2_single form-control" tabindex="-1">
-                                                          <option value="{{-- {{ $jur->id }} --}}">{{-- {{ $jur->tingkatan->tingkatan }} {{ $jur->jurusan }} --}}</option>
+                                                      <select id="jurusan" name="jurusan_id" class="select2_single form-control" tabindex="-1">
+                                                        <option value="0">--- Pilih ---</option>
+                                                        @foreach (App\Model\Kelas\Jurusan::all() as $jur)
+                                                          <option value="{{ $jur->id }}">{{ $jur->tingkatan->tingkatan }} {{ $jur->jurusan }}</option>
+                                                        @endforeach
                                                       </select>
                                                   </div>
                                           </div>
                                           <div class="form-group">
                                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Konsentrasi dan Kelas</label>
                                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                                      <select name="konsentrasi_id" id="subcategory" class="select2_single form-control" tabindex="-1">
-                                                          <option value=""></option>
+                                                      <select id="konsentrasi" name="konsentrasi_id" class="select2_single form-control" tabindex="-1">
+                                                          <option value="0">--- Pilih ---</option>
                                                       </select>
                                                   </div>
                                           </div>
@@ -59,7 +61,6 @@
                                           <hr>
                                   </form>
                               </div>  
-                              {{-- ! x_content --}}
                   </div>
               </div>
           </div>
@@ -80,34 +81,37 @@
                               <table class="table table-striped projects">
                                   <thead>
                                       <tr>
-                                          <th style="width: 1%">No.</th>
-                                          <th style="width: 20%">NIS</th>
+                                          <th>No.</th>
+                                          <th>NIS</th>
                                           <th>Nama Siswa</th>
                                           <th>Hadir</th>
-                                          <th style="width: 20%">Tidak Hadir</th>
+                                          <th>Tidak Hadir</th>
                                           <th>Persentase</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr>
-                                          <td>#</td>
-                                          <td>
-                                              <a>Pesamakini Backend UI</a>
-                                              <br />
-                                              <small>Created 01.01.2015</small>
-                                          </td>
-                                          <td></td>
-                                          <td>
-                                              <button type="button" class="btn btn-success btn-xs">Success</button>
-                                          </td>
-                                          <td></td>
-                                          <td class="project_progress">
-                                              <div class="progress progress_sm">
-                                                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                                              </div>
-                                                  <small>57% Complete</small>
-                                          </td>
-                                      </tr>
+                                      @if (app('request')->input('_token'))
+                                        @php
+                                          $konsentrasi = App\Model\Kelas\Konsentrasi::find(app('request')->input('konsentrasi_id'));
+                                        @endphp
+                                      @endif
+                                      @php
+                                          $i = 1;
+                                          $konsentrasi = App\Model\Kelas\Konsentrasi::find(app('request')->input('konsentrasi_id'));
+                                      @endphp
+                                      @foreach ($konsentrasi->siswas as $siswa)
+                                        <tr class="even pointer">
+                                          <td>{{ $i }}</td>
+                                          <td>{{ $siswa->nis }}</td>
+                                          <td>{{ $siswa->nama }}</td>
+                                          <td>{{ $siswa->absens->count() }}</td>
+                                          <td>{{ $siswa->absensis->count() }}</td>
+                                          <td>{{ $siswa->persentaseKetidakhadiran() }} %</td>
+                                        </tr>
+                                        @php
+                                          $i++;
+                                        @endphp
+                                      @endforeach
                                   </tbody>
                               </table>
                       </div>
@@ -128,5 +132,19 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/build/js/custom.min.js') }}"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script>
+        $('#jurusan').on('change', function(e){
+            var a = e.target.value;
+            jQuery.get('/api/konsentrasis/' + a, function(data) {
+                $('#konsentrasi').empty();
+                jQuery.each(data, function(index, obj){
+                    $('#konsentrasi').append('<option value="'+obj.id+'">'+obj.konsentrasi+' '+obj.subbagian+'</option>');
+                });
+            });
+        });
+    </script>
   </body>
 </html>

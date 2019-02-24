@@ -31,6 +31,12 @@ class DataGuruController extends Controller
      */
     public function store(Request $req)
     {
+        $this->validate($req, [
+            'nip'   => 'unique:gurus|numeric',
+            'kode' => 'unique:gurus',
+            'nama' => 'required|string'
+        ]);
+
         $user = User::create([
             'name'=>$req->nama,
             'username'=>$req->username,

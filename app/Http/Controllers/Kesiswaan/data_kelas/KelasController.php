@@ -48,7 +48,11 @@ class KelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($jurusan_id, Request $request)
-    {
+    {   
+        $this->validate($request, [
+            'subbagian' => 'unique:konsentrasis|numeric'
+        ]);
+
         $jurusan = Jurusan::find($jurusan_id)->konsentrasis()->create([
             'konsentrasi' => $request->konsentrasi,
             'subbagian' => $request->subbagian

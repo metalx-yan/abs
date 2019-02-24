@@ -85,7 +85,8 @@ Route::get('/listAlpha', 'Kesiswaan\data_absen\DataAbsenController@listAlpha')->
 Route::get('/listKonsen/{konsen}', 'Kesiswaan\data_absen\DataAbsenController@listKonsen')->name('listKonsen');
 Route::get('/listSiswa/{konsen}/{siswa}', 'Kesiswaan\data_absen\DataAbsenController@listSiswa')->name('listSiswa');
 
-Route::get('pdf/absensi', 'PDFController@absensi')->name('pdf.absensi');
+Route::get('pdf/absensi/{siswaid}', 'PDFController@absensi')->name('pdf.absensi');
+Route::get('pdf/absen/{siswaid}', 'PDFController@absensi')->name('pdf.absen');
 
 Route::get('/absen', 'Guru\GuruController@absen')->name('absen');
 Route::get('/absensi', 'Guru\GuruController@absensi')->name('absensi');

@@ -32,7 +32,6 @@ class GuruController extends Controller
      */
     public function absen()
     {
-        // dd('stop');
         return view('pages.guru.absen');
     }
 

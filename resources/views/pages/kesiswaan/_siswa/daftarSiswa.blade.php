@@ -54,8 +54,10 @@
                         <div class="bs-glyphicons">
                             <ul class="bs-glyphicons-list">
                                 <li>
+                                    <a href="" class="glyphicon-class">
                                     <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                                    <span class="glyphicon-class">Cetak Data Siswa</span>
+                                    <span class="glyphicon-class"></span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
